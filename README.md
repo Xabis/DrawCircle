@@ -3,7 +3,7 @@ DrawCircle
 
 A well rounded plugin for Doom Builder 2
 
-![animated demo](http://www.3ddelta.com/doom/dc-demo.gif)
+![animated demo](https://raw.github.com/Xabis/DrawCircle/master/site/dc-demo.gif)
 
 To use, simply switch to the Draw Circle mode and right-click drag to draw the guide line.
 
@@ -24,7 +24,7 @@ Note that the "Never Snap circle linedefs" option is enabled by default
 
 Shortcuts
 ---------
-![shortcut list](http://www.3ddelta.com/doom/dc-keys.png)
+![shortcut list](https://raw.github.com/Xabis/DrawCircle/master/site/dc-keys.png)
 
 A set of actions are available for customization inside the doom builder preferences panel. You can bind a key shortcut for easy access.
 
@@ -32,10 +32,10 @@ By default the +/i linedef is bound to shift + mouse wheel
 
 You may also access these tools from the main toolbar:
 
-![toolbar icons](http://www.3ddelta.com/doom/dc-toolbar.png)
+![toolbar icons](https://raw.github.com/Xabis/DrawCircle/master/site/dc-toolbar.png)
 
 Dock Panel
 ----------
-![panel](http://www.3ddelta.com/doom/dc-panel.png)
+![panel](https://raw.github.com/Xabis/DrawCircle/master/site/dc-panel.png)
 
 A few display options are available in the side panel, as well as some handy sizing tools. To access, click the "Draw Circle" tab on the right.
