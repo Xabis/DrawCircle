@@ -291,7 +291,6 @@ namespace TriDelta.DrawCircleMode {
          if (handleInner == null || editSides < 3)
             return;
 
-         Debug.WriteLine("sides: " + editSides + " len: " + newlength);
          double aoe = (360 / editSides) / 2;
          double rads = aoe * (Math.PI / 180);
          float length = (float)((newlength / 2) / Math.Sin(rads)); //assume a right angle (sin(90) = 1)
@@ -314,12 +313,10 @@ namespace TriDelta.DrawCircleMode {
             originRads += (float)(Math.PI * 2);
 
          panel.SetAngleBox((decimal)(originRads * (180 / Math.PI)));
-         //tbAngleBox.Push((decimal)(originRads * (180 / Math.PI)));
       }
 
       private void UpdateLengthBox() {
          panel.SetLengthBox((decimal)(handleInner.Position - handleOuter.Position).GetLength());
-         //tbLengthBox.Push((decimal)(handleInner.Position - handleOuter.Position).GetLength());
       }
 
       //Flushes and rebuilds the circle vertex cache
