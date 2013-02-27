@@ -661,13 +661,30 @@ namespace TriDelta.DrawCircleMode {
          Render();
       }
 
+
       public override void OnAccept() {
+         OnAccept(false);
+      }
+      public void OnAccept(bool forcenostitch) {
          Cursor.Current = Cursors.AppStarting;
          General.Settings.FindDefaultDrawSettings();
 
          // When points have been drawn
          if(editCircle.Count > 0) {
             editCircle.Add(editCircle[0]); //close it
+
+            //if the user holds down ALT while creating, assume they want a "guide" for positioning other map elements. A guide will not split linedefs.
+            if (forcenostitch || General.Interface.AltState) {
+               int i = editCircle.Count;
+               DrawnVertex v;
+               while (i-- > 0) {
+                  v = editCircle[i];
+                  v.stitch = false;
+                  v.stitchline = false;
+
+                  editCircle[i] = v;
+               }
+            }
 
             // Make undo for the draw
             General.Map.UndoRedo.CreateUndo(textUndoEntry);
