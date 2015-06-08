@@ -32,6 +32,12 @@ NEW for 2.0:
 
 ![new 2.0 features](https://raw.github.com/Xabis/DrawCircle/master/site/dc-preview2.png)
 
+2.0.1
+------------
+* fixed an issue where sometimes dragging a control handle would not work.
+* edit mode will no longer start the drawing over by default, but will instead manipulate the control handles.
+* added an auto scrollbar to the options panel for cases where the main window is not tall enough.
+
 Shortcuts
 ---------
 ![shortcut list](https://raw.github.com/Xabis/DrawCircle/master/site/dc-keys.png)

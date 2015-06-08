@@ -28,20 +28,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tblProps = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
-            this.udSideCount = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.udThickness = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.udAngle = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.lblLength = new System.Windows.Forms.Label();
-            this.udLength = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.udAnteSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udAnteSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.grpAppearance = new System.Windows.Forms.GroupBox();
             this.chkDrawAnteSpokes = new System.Windows.Forms.CheckBox();
             this.chkDrawSpokes = new System.Windows.Forms.CheckBox();
@@ -57,8 +49,21 @@
             this.udDesiredLength = new System.Windows.Forms.NumericUpDown();
             this.cmdResizeToFit = new System.Windows.Forms.Button();
             this.lblDesiredLength = new System.Windows.Forms.Label();
+            this.chkAlwaysCreateOnEdit = new System.Windows.Forms.CheckBox();
+            this.udSideCount = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udThickness = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udAngle = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udLength = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udAnteSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udAnteSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.grpProps.SuspendLayout();
             this.tblProps.SuspendLayout();
+            this.grpAppearance.SuspendLayout();
+            this.grpTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSideCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udThickness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).BeginInit();
@@ -67,10 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeStart)).BeginInit();
-            this.grpAppearance.SuspendLayout();
-            this.grpTools.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAngle
@@ -90,7 +91,7 @@
             this.grpProps.Controls.Add(this.label1);
             this.grpProps.Controls.Add(this.tblProps);
             this.grpProps.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpProps.Location = new System.Drawing.Point(0, 188);
+            this.grpProps.Location = new System.Drawing.Point(0, 213);
             this.grpProps.Name = "grpProps";
             this.grpProps.Padding = new System.Windows.Forms.Padding(15);
             this.grpProps.Size = new System.Drawing.Size(254, 264);
@@ -156,6 +157,294 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "Ante Spoke Start:";
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Sides:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 136);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Spoke Start:";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Spoke Size:";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Thickness:";
+            // 
+            // lblLength
+            // 
+            this.lblLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLength.AutoSize = true;
+            this.lblLength.Location = new System.Drawing.Point(3, 58);
+            this.lblLength.Name = "lblLength";
+            this.lblLength.Size = new System.Drawing.Size(91, 13);
+            this.lblLength.TabIndex = 2;
+            this.lblLength.Text = "Length:";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 162);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Ante Spoke Size:";
+            // 
+            // grpAppearance
+            // 
+            this.grpAppearance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpAppearance.Controls.Add(this.chkAlwaysCreateOnEdit);
+            this.grpAppearance.Controls.Add(this.chkDrawAnteSpokes);
+            this.grpAppearance.Controls.Add(this.chkDrawSpokes);
+            this.grpAppearance.Controls.Add(this.chkFillCenter);
+            this.grpAppearance.Controls.Add(this.chkNeverSnapCircle);
+            this.grpAppearance.Controls.Add(this.chkShowSideCount);
+            this.grpAppearance.Controls.Add(this.chkShowTotalLength);
+            this.grpAppearance.Controls.Add(this.chkShowLineLength);
+            this.grpAppearance.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpAppearance.Location = new System.Drawing.Point(0, 0);
+            this.grpAppearance.Name = "grpAppearance";
+            this.grpAppearance.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
+            this.grpAppearance.Size = new System.Drawing.Size(254, 213);
+            this.grpAppearance.TabIndex = 2;
+            this.grpAppearance.TabStop = false;
+            this.grpAppearance.Text = "Appearance";
+            // 
+            // chkDrawAnteSpokes
+            // 
+            this.chkDrawAnteSpokes.AutoSize = true;
+            this.chkDrawAnteSpokes.Location = new System.Drawing.Point(13, 164);
+            this.chkDrawAnteSpokes.Name = "chkDrawAnteSpokes";
+            this.chkDrawAnteSpokes.Size = new System.Drawing.Size(115, 17);
+            this.chkDrawAnteSpokes.TabIndex = 6;
+            this.chkDrawAnteSpokes.Text = "Draw Ante Spokes";
+            this.chkDrawAnteSpokes.UseVisualStyleBackColor = true;
+            this.chkDrawAnteSpokes.CheckedChanged += new System.EventHandler(this.chkDrawAnteSpokes_CheckedChanged);
+            // 
+            // chkDrawSpokes
+            // 
+            this.chkDrawSpokes.AutoSize = true;
+            this.chkDrawSpokes.Location = new System.Drawing.Point(13, 141);
+            this.chkDrawSpokes.Name = "chkDrawSpokes";
+            this.chkDrawSpokes.Size = new System.Drawing.Size(90, 17);
+            this.chkDrawSpokes.TabIndex = 5;
+            this.chkDrawSpokes.Text = "Draw Spokes";
+            this.chkDrawSpokes.UseVisualStyleBackColor = true;
+            this.chkDrawSpokes.CheckedChanged += new System.EventHandler(this.chkDrawSpokes_CheckedChanged);
+            // 
+            // chkFillCenter
+            // 
+            this.chkFillCenter.AutoSize = true;
+            this.chkFillCenter.Location = new System.Drawing.Point(13, 118);
+            this.chkFillCenter.Name = "chkFillCenter";
+            this.chkFillCenter.Size = new System.Drawing.Size(184, 17);
+            this.chkFillCenter.TabIndex = 4;
+            this.chkFillCenter.Text = "Fill center when thickness is used";
+            this.chkFillCenter.UseVisualStyleBackColor = true;
+            this.chkFillCenter.CheckedChanged += new System.EventHandler(this.chkFillCenter_CheckedChanged);
+            // 
+            // chkNeverSnapCircle
+            // 
+            this.chkNeverSnapCircle.AutoSize = true;
+            this.chkNeverSnapCircle.Location = new System.Drawing.Point(13, 95);
+            this.chkNeverSnapCircle.Name = "chkNeverSnapCircle";
+            this.chkNeverSnapCircle.Size = new System.Drawing.Size(141, 17);
+            this.chkNeverSnapCircle.TabIndex = 3;
+            this.chkNeverSnapCircle.Text = "Never snap circle to grid";
+            this.chkNeverSnapCircle.UseVisualStyleBackColor = true;
+            this.chkNeverSnapCircle.CheckedChanged += new System.EventHandler(this.chkNeverSnapCircle_CheckedChanged);
+            // 
+            // chkShowSideCount
+            // 
+            this.chkShowSideCount.AutoSize = true;
+            this.chkShowSideCount.Location = new System.Drawing.Point(13, 72);
+            this.chkShowSideCount.Name = "chkShowSideCount";
+            this.chkShowSideCount.Size = new System.Drawing.Size(117, 17);
+            this.chkShowSideCount.TabIndex = 2;
+            this.chkShowSideCount.Text = "Show linedef count";
+            this.chkShowSideCount.UseVisualStyleBackColor = true;
+            this.chkShowSideCount.CheckedChanged += new System.EventHandler(this.chkShowSideCount_CheckedChanged);
+            // 
+            // chkShowTotalLength
+            // 
+            this.chkShowTotalLength.AutoSize = true;
+            this.chkShowTotalLength.Location = new System.Drawing.Point(13, 49);
+            this.chkShowTotalLength.Name = "chkShowTotalLength";
+            this.chkShowTotalLength.Size = new System.Drawing.Size(142, 17);
+            this.chkShowTotalLength.TabIndex = 1;
+            this.chkShowTotalLength.Text = "Show total linedef length";
+            this.chkShowTotalLength.UseVisualStyleBackColor = true;
+            this.chkShowTotalLength.CheckedChanged += new System.EventHandler(this.chkShowTotalLength_CheckedChanged);
+            // 
+            // chkShowLineLength
+            // 
+            this.chkShowLineLength.AutoSize = true;
+            this.chkShowLineLength.Location = new System.Drawing.Point(13, 26);
+            this.chkShowLineLength.Name = "chkShowLineLength";
+            this.chkShowLineLength.Size = new System.Drawing.Size(119, 17);
+            this.chkShowLineLength.TabIndex = 0;
+            this.chkShowLineLength.Text = "Show linedef length";
+            this.chkShowLineLength.UseVisualStyleBackColor = true;
+            this.chkShowLineLength.CheckedChanged += new System.EventHandler(this.chkShowLineLength_CheckedChanged);
+            // 
+            // grpTools
+            // 
+            this.grpTools.AutoSize = true;
+            this.grpTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpTools.Controls.Add(this.cmdSetTotalLength);
+            this.grpTools.Controls.Add(this.udDesiredTotal);
+            this.grpTools.Controls.Add(this.lblSetTotalLength);
+            this.grpTools.Controls.Add(this.udDesiredLength);
+            this.grpTools.Controls.Add(this.cmdResizeToFit);
+            this.grpTools.Controls.Add(this.lblDesiredLength);
+            this.grpTools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpTools.Location = new System.Drawing.Point(0, 477);
+            this.grpTools.Name = "grpTools";
+            this.grpTools.Padding = new System.Windows.Forms.Padding(15);
+            this.grpTools.Size = new System.Drawing.Size(254, 138);
+            this.grpTools.TabIndex = 3;
+            this.grpTools.TabStop = false;
+            this.grpTools.Text = "Tools";
+            // 
+            // cmdSetTotalLength
+            // 
+            this.cmdSetTotalLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdSetTotalLength.Location = new System.Drawing.Point(160, 84);
+            this.cmdSetTotalLength.Name = "cmdSetTotalLength";
+            this.cmdSetTotalLength.Size = new System.Drawing.Size(75, 23);
+            this.cmdSetTotalLength.TabIndex = 6;
+            this.cmdSetTotalLength.Text = "Resize";
+            this.cmdSetTotalLength.UseVisualStyleBackColor = true;
+            this.cmdSetTotalLength.Click += new System.EventHandler(this.cmdSetTotalLength_Click);
+            // 
+            // udDesiredTotal
+            // 
+            this.udDesiredTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.udDesiredTotal.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udDesiredTotal.Location = new System.Drawing.Point(18, 87);
+            this.udDesiredTotal.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.udDesiredTotal.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDesiredTotal.Name = "udDesiredTotal";
+            this.udDesiredTotal.Size = new System.Drawing.Size(136, 20);
+            this.udDesiredTotal.TabIndex = 5;
+            this.udDesiredTotal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblSetTotalLength
+            // 
+            this.lblSetTotalLength.AutoSize = true;
+            this.lblSetTotalLength.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblSetTotalLength.Location = new System.Drawing.Point(18, 71);
+            this.lblSetTotalLength.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.lblSetTotalLength.Name = "lblSetTotalLength";
+            this.lblSetTotalLength.Size = new System.Drawing.Size(127, 13);
+            this.lblSetTotalLength.TabIndex = 4;
+            this.lblSetTotalLength.Text = "Set total linedef length to:";
+            // 
+            // udDesiredLength
+            // 
+            this.udDesiredLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.udDesiredLength.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udDesiredLength.Location = new System.Drawing.Point(18, 45);
+            this.udDesiredLength.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.udDesiredLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDesiredLength.Name = "udDesiredLength";
+            this.udDesiredLength.Size = new System.Drawing.Size(137, 20);
+            this.udDesiredLength.TabIndex = 3;
+            this.udDesiredLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // cmdResizeToFit
+            // 
+            this.cmdResizeToFit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdResizeToFit.Location = new System.Drawing.Point(161, 42);
+            this.cmdResizeToFit.Name = "cmdResizeToFit";
+            this.cmdResizeToFit.Size = new System.Drawing.Size(75, 23);
+            this.cmdResizeToFit.TabIndex = 2;
+            this.cmdResizeToFit.Text = "Resize";
+            this.cmdResizeToFit.UseVisualStyleBackColor = true;
+            this.cmdResizeToFit.Click += new System.EventHandler(this.cmdResizeToFit_Click);
+            // 
+            // lblDesiredLength
+            // 
+            this.lblDesiredLength.AutoSize = true;
+            this.lblDesiredLength.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblDesiredLength.Location = new System.Drawing.Point(18, 28);
+            this.lblDesiredLength.Name = "lblDesiredLength";
+            this.lblDesiredLength.Size = new System.Drawing.Size(90, 13);
+            this.lblDesiredLength.TabIndex = 1;
+            this.lblDesiredLength.Text = "Set all linedefs to:";
+            // 
+            // chkAlwaysCreateOnEdit
+            // 
+            this.chkAlwaysCreateOnEdit.AutoSize = true;
+            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(13, 187);
+            this.chkAlwaysCreateOnEdit.Name = "chkAlwaysCreateOnEdit";
+            this.chkAlwaysCreateOnEdit.Size = new System.Drawing.Size(141, 17);
+            this.chkAlwaysCreateOnEdit.TabIndex = 7;
+            this.chkAlwaysCreateOnEdit.Text = "Always start over on edit";
+            this.chkAlwaysCreateOnEdit.UseVisualStyleBackColor = true;
+            this.chkAlwaysCreateOnEdit.CheckedChanged += new System.EventHandler(this.chkAlwaysCreateOnEdit_CheckedChanged);
+            // 
             // udSideCount
             // 
             this.udSideCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -201,36 +490,6 @@
             0});
             this.udSideCount.ValueChanged += new System.EventHandler(this.udSideCount_ValueChanged);
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Sides:";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Spoke Start:";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Spoke Size:";
-            // 
             // udThickness
             // 
             this.udThickness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -272,16 +531,6 @@
             this.udThickness.TabIndex = 5;
             this.udThickness.ValueChanged += new System.EventHandler(this.udThickness_ValueChanged);
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Thickness:";
-            // 
             // udAngle
             // 
             this.udAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -322,16 +571,6 @@
             this.udAngle.Size = new System.Drawing.Size(121, 20);
             this.udAngle.TabIndex = 1;
             this.udAngle.ValueChanged += new System.EventHandler(this.udAngle_ValueChanged);
-            // 
-            // lblLength
-            // 
-            this.lblLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLength.AutoSize = true;
-            this.lblLength.Location = new System.Drawing.Point(3, 58);
-            this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(91, 13);
-            this.lblLength.TabIndex = 2;
-            this.lblLength.Text = "Length:";
             // 
             // udLength
             // 
@@ -446,16 +685,6 @@
             this.udSpokeStart.TabIndex = 9;
             this.udSpokeStart.ValueChanged += new System.EventHandler(this.udSpokeStart_ValueChanged);
             // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 162);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Ante Spoke Size:";
-            // 
             // udAnteSpokeSize
             // 
             this.udAnteSpokeSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -533,235 +762,26 @@
             this.udAnteSpokeStart.TabIndex = 14;
             this.udAnteSpokeStart.ValueChanged += new System.EventHandler(this.udAnteSpokeStart_ValueChanged);
             // 
-            // grpAppearance
-            // 
-            this.grpAppearance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.grpAppearance.Controls.Add(this.chkDrawAnteSpokes);
-            this.grpAppearance.Controls.Add(this.chkDrawSpokes);
-            this.grpAppearance.Controls.Add(this.chkFillCenter);
-            this.grpAppearance.Controls.Add(this.chkNeverSnapCircle);
-            this.grpAppearance.Controls.Add(this.chkShowSideCount);
-            this.grpAppearance.Controls.Add(this.chkShowTotalLength);
-            this.grpAppearance.Controls.Add(this.chkShowLineLength);
-            this.grpAppearance.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpAppearance.Location = new System.Drawing.Point(0, 0);
-            this.grpAppearance.Name = "grpAppearance";
-            this.grpAppearance.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.grpAppearance.Size = new System.Drawing.Size(254, 188);
-            this.grpAppearance.TabIndex = 2;
-            this.grpAppearance.TabStop = false;
-            this.grpAppearance.Text = "Appearance";
-            // 
-            // chkDrawAnteSpokes
-            // 
-            this.chkDrawAnteSpokes.AutoSize = true;
-            this.chkDrawAnteSpokes.Location = new System.Drawing.Point(13, 164);
-            this.chkDrawAnteSpokes.Name = "chkDrawAnteSpokes";
-            this.chkDrawAnteSpokes.Size = new System.Drawing.Size(115, 17);
-            this.chkDrawAnteSpokes.TabIndex = 6;
-            this.chkDrawAnteSpokes.Text = "Draw Ante Spokes";
-            this.chkDrawAnteSpokes.UseVisualStyleBackColor = true;
-            this.chkDrawAnteSpokes.CheckedChanged += new System.EventHandler(this.chkDrawAnteSpokes_CheckedChanged);
-            // 
-            // chkDrawSpokes
-            // 
-            this.chkDrawSpokes.AutoSize = true;
-            this.chkDrawSpokes.Location = new System.Drawing.Point(13, 141);
-            this.chkDrawSpokes.Name = "chkDrawSpokes";
-            this.chkDrawSpokes.Size = new System.Drawing.Size(90, 17);
-            this.chkDrawSpokes.TabIndex = 5;
-            this.chkDrawSpokes.Text = "Draw Spokes";
-            this.chkDrawSpokes.UseVisualStyleBackColor = true;
-            this.chkDrawSpokes.CheckedChanged += new System.EventHandler(this.chkDrawSpokes_CheckedChanged);
-            // 
-            // chkFillCenter
-            // 
-            this.chkFillCenter.AutoSize = true;
-            this.chkFillCenter.Location = new System.Drawing.Point(13, 118);
-            this.chkFillCenter.Name = "chkFillCenter";
-            this.chkFillCenter.Size = new System.Drawing.Size(184, 17);
-            this.chkFillCenter.TabIndex = 4;
-            this.chkFillCenter.Text = "Fill center when thickness is used";
-            this.chkFillCenter.UseVisualStyleBackColor = true;
-            this.chkFillCenter.CheckedChanged += new System.EventHandler(this.chkFillCenter_CheckedChanged);
-            // 
-            // chkNeverSnapCircle
-            // 
-            this.chkNeverSnapCircle.AutoSize = true;
-            this.chkNeverSnapCircle.Location = new System.Drawing.Point(13, 95);
-            this.chkNeverSnapCircle.Name = "chkNeverSnapCircle";
-            this.chkNeverSnapCircle.Size = new System.Drawing.Size(141, 17);
-            this.chkNeverSnapCircle.TabIndex = 3;
-            this.chkNeverSnapCircle.Text = "Never snap circle to grid";
-            this.chkNeverSnapCircle.UseVisualStyleBackColor = true;
-            this.chkNeverSnapCircle.CheckedChanged += new System.EventHandler(this.chkNeverSnapCircle_CheckedChanged);
-            // 
-            // chkShowSideCount
-            // 
-            this.chkShowSideCount.AutoSize = true;
-            this.chkShowSideCount.Location = new System.Drawing.Point(13, 72);
-            this.chkShowSideCount.Name = "chkShowSideCount";
-            this.chkShowSideCount.Size = new System.Drawing.Size(117, 17);
-            this.chkShowSideCount.TabIndex = 2;
-            this.chkShowSideCount.Text = "Show linedef count";
-            this.chkShowSideCount.UseVisualStyleBackColor = true;
-            this.chkShowSideCount.CheckedChanged += new System.EventHandler(this.chkShowSideCount_CheckedChanged);
-            // 
-            // chkShowTotalLength
-            // 
-            this.chkShowTotalLength.AutoSize = true;
-            this.chkShowTotalLength.Location = new System.Drawing.Point(13, 49);
-            this.chkShowTotalLength.Name = "chkShowTotalLength";
-            this.chkShowTotalLength.Size = new System.Drawing.Size(142, 17);
-            this.chkShowTotalLength.TabIndex = 1;
-            this.chkShowTotalLength.Text = "Show total linedef length";
-            this.chkShowTotalLength.UseVisualStyleBackColor = true;
-            this.chkShowTotalLength.CheckedChanged += new System.EventHandler(this.chkShowTotalLength_CheckedChanged);
-            // 
-            // chkShowLineLength
-            // 
-            this.chkShowLineLength.AutoSize = true;
-            this.chkShowLineLength.Location = new System.Drawing.Point(13, 26);
-            this.chkShowLineLength.Name = "chkShowLineLength";
-            this.chkShowLineLength.Size = new System.Drawing.Size(119, 17);
-            this.chkShowLineLength.TabIndex = 0;
-            this.chkShowLineLength.Text = "Show linedef length";
-            this.chkShowLineLength.UseVisualStyleBackColor = true;
-            this.chkShowLineLength.CheckedChanged += new System.EventHandler(this.chkShowLineLength_CheckedChanged);
-            // 
-            // grpTools
-            // 
-            this.grpTools.AutoSize = true;
-            this.grpTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.grpTools.Controls.Add(this.cmdSetTotalLength);
-            this.grpTools.Controls.Add(this.udDesiredTotal);
-            this.grpTools.Controls.Add(this.lblSetTotalLength);
-            this.grpTools.Controls.Add(this.udDesiredLength);
-            this.grpTools.Controls.Add(this.cmdResizeToFit);
-            this.grpTools.Controls.Add(this.lblDesiredLength);
-            this.grpTools.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpTools.Location = new System.Drawing.Point(0, 452);
-            this.grpTools.Name = "grpTools";
-            this.grpTools.Padding = new System.Windows.Forms.Padding(15);
-            this.grpTools.Size = new System.Drawing.Size(254, 138);
-            this.grpTools.TabIndex = 3;
-            this.grpTools.TabStop = false;
-            this.grpTools.Text = "Tools";
-            // 
-            // cmdSetTotalLength
-            // 
-            this.cmdSetTotalLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSetTotalLength.Location = new System.Drawing.Point(160, 84);
-            this.cmdSetTotalLength.Name = "cmdSetTotalLength";
-            this.cmdSetTotalLength.Size = new System.Drawing.Size(75, 23);
-            this.cmdSetTotalLength.TabIndex = 6;
-            this.cmdSetTotalLength.Text = "Resize";
-            this.cmdSetTotalLength.UseVisualStyleBackColor = true;
-            this.cmdSetTotalLength.Click += new System.EventHandler(this.cmdSetTotalLength_Click);
-            // 
-            // udDesiredTotal
-            // 
-            this.udDesiredTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.udDesiredTotal.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udDesiredTotal.Location = new System.Drawing.Point(18, 87);
-            this.udDesiredTotal.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.udDesiredTotal.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDesiredTotal.Name = "udDesiredTotal";
-            this.udDesiredTotal.Size = new System.Drawing.Size(136, 20);
-            this.udDesiredTotal.TabIndex = 5;
-            this.udDesiredTotal.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // lblSetTotalLength
-            // 
-            this.lblSetTotalLength.AutoSize = true;
-            this.lblSetTotalLength.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblSetTotalLength.Location = new System.Drawing.Point(18, 71);
-            this.lblSetTotalLength.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.lblSetTotalLength.Name = "lblSetTotalLength";
-            this.lblSetTotalLength.Size = new System.Drawing.Size(127, 13);
-            this.lblSetTotalLength.TabIndex = 4;
-            this.lblSetTotalLength.Text = "Set total linedef length to:";
-            // 
-            // udDesiredLength
-            // 
-            this.udDesiredLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.udDesiredLength.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udDesiredLength.Location = new System.Drawing.Point(18, 45);
-            this.udDesiredLength.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.udDesiredLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDesiredLength.Name = "udDesiredLength";
-            this.udDesiredLength.Size = new System.Drawing.Size(137, 20);
-            this.udDesiredLength.TabIndex = 3;
-            this.udDesiredLength.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // cmdResizeToFit
-            // 
-            this.cmdResizeToFit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdResizeToFit.Location = new System.Drawing.Point(161, 42);
-            this.cmdResizeToFit.Name = "cmdResizeToFit";
-            this.cmdResizeToFit.Size = new System.Drawing.Size(75, 23);
-            this.cmdResizeToFit.TabIndex = 2;
-            this.cmdResizeToFit.Text = "Resize";
-            this.cmdResizeToFit.UseVisualStyleBackColor = true;
-            this.cmdResizeToFit.Click += new System.EventHandler(this.cmdResizeToFit_Click);
-            // 
-            // lblDesiredLength
-            // 
-            this.lblDesiredLength.AutoSize = true;
-            this.lblDesiredLength.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblDesiredLength.Location = new System.Drawing.Point(18, 28);
-            this.lblDesiredLength.Name = "lblDesiredLength";
-            this.lblDesiredLength.Size = new System.Drawing.Size(90, 13);
-            this.lblDesiredLength.TabIndex = 1;
-            this.lblDesiredLength.Text = "Set all linedefs to:";
-            // 
             // OptionsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.grpTools);
             this.Controls.Add(this.grpProps);
             this.Controls.Add(this.grpAppearance);
             this.Name = "OptionsPanel";
-            this.Size = new System.Drawing.Size(254, 539);
+            this.Size = new System.Drawing.Size(254, 619);
             this.grpProps.ResumeLayout(false);
             this.grpProps.PerformLayout();
             this.tblProps.ResumeLayout(false);
             this.tblProps.PerformLayout();
+            this.grpAppearance.ResumeLayout(false);
+            this.grpAppearance.PerformLayout();
+            this.grpTools.ResumeLayout(false);
+            this.grpTools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSideCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udThickness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).EndInit();
@@ -770,12 +790,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeStart)).EndInit();
-            this.grpAppearance.ResumeLayout(false);
-            this.grpAppearance.PerformLayout();
-            this.grpTools.ResumeLayout(false);
-            this.grpTools.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -817,5 +831,6 @@
         private System.Windows.Forms.Label label6;
         private VariableNumericUpDown udAnteSpokeSize;
         private VariableNumericUpDown udAnteSpokeStart;
+        private System.Windows.Forms.CheckBox chkAlwaysCreateOnEdit;
     }
 }

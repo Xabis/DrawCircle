@@ -62,6 +62,8 @@ namespace TriDelta.DrawCircleMode {
         private bool drawspokes;
         private bool drawantespokes;
 
+        private bool alwayscreateonedit;
+
         private bool isCreating; //force fire updates on mouse move if creating the guide
 
         private List<List<DrawnVertex>> shapes;
@@ -103,7 +105,8 @@ namespace TriDelta.DrawCircleMode {
             labelSizeLength.Backcolor = General.Colors.Background;
             labelSizeLength.Scale = TEXT_SCALE;
             labelSizeLength.TransformCoords = true;
-
+            
+            alwayscreateonedit = General.Settings.ReadPluginSetting("alwayscreateonedit", false);
             showlinelength = General.Settings.ReadPluginSetting("showlinelength", true);
             showlinetotal = General.Settings.ReadPluginSetting("showlinetotal", true);
             showsidecount = General.Settings.ReadPluginSetting("showsidecount", true);
@@ -157,6 +160,17 @@ namespace TriDelta.DrawCircleMode {
         //==============================================================================================================
         // Properties
         //==============================================================================================================
+        internal bool AlwaysCreateOnEdit {
+            get { return alwayscreateonedit; }
+            set {
+                if (alwayscreateonedit != value) {
+                    alwayscreateonedit = value;
+                    General.Settings.WritePluginSetting("alwayscreateonedit", value);
+                    Update();
+                }
+            }
+        }
+
         internal bool ShowLineLength {
             get { return showlinelength; }
             set {
@@ -827,7 +841,7 @@ namespace TriDelta.DrawCircleMode {
 
         //retrieves the current mouse position on the grid, snapped as necessary
         private Vector2D GetCurrentPosition() {
-            Vector2D vm = mousemappos;
+            Vector2D vm = MouseMapPos;
             float vrange = 20f / renderer.Scale;
 
             // Try the nearest vertex
@@ -917,49 +931,68 @@ namespace TriDelta.DrawCircleMode {
         protected override void OnEditBegin() {
             base.OnEditBegin();
 
-            isCreating = true;
+            if (shapes.Count == 0 || alwayscreateonedit) {
+                //this is a brand new circle, so setup the control handles and do initial shape creation and rendering
+                isCreating = true;
 
-            snapcircletogrid = !neversnapcircle && (General.Interface.ShiftState ^ General.Interface.SnapToGrid) ^ General.Interface.CtrlState; //if shift is held then flip the snap state for both guide and circle
-            snapguidetogrid = General.Interface.ShiftState ^ General.Interface.SnapToGrid;                                  //if control is held then only flip the circle
+                snapcircletogrid = !neversnapcircle && (General.Interface.ShiftState ^ General.Interface.SnapToGrid) ^ General.Interface.CtrlState; //if shift is held then flip the snap state for both guide and circle
+                snapguidetogrid = General.Interface.ShiftState ^ General.Interface.SnapToGrid;                                  //if control is held then only flip the circle
 
-            tbAddSide.Enabled = false;
-            tbRemoveSide.Enabled = false;
-            tbRotateOriginCW.Enabled = false;
-            tbRotateOriginCCW.Enabled = false;
-            tbSwapHandles.Enabled = false;
-            panel.EditState = false;
+                tbAddSide.Enabled = false;
+                tbRemoveSide.Enabled = false;
+                tbRotateOriginCW.Enabled = false;
+                tbRotateOriginCCW.Enabled = false;
+                tbSwapHandles.Enabled = false;
+                panel.EditState = false;
 
-            //initialize the guide line
-            handleInner = new ControlHandle();
-            handleOuter = new ControlHandle();
-            handleInner.Position = handleOuter.Position = GetCurrentPosition();
+                //initialize the guide line
+                handleInner = new ControlHandle();
+                handleOuter = new ControlHandle();
+                handleInner.Position = handleOuter.Position = GetCurrentPosition();
 
-            Update();
+                Update();
+            } else if (handleInner != null) {
+                //if we are already in preview mode, then only allow the control handles to be dragged
+                float gripsize = GRIP_SIZE / renderer.Scale;
+                if (handleOuter.isHovered(MouseMapPos, gripsize)) {
+                    handleCurrent = handleOuter;
+                    General.Interface.SetCursor(Cursors.Cross);
+                    return;
+                } else if (handleInner.isHovered(MouseMapPos, gripsize)) {
+                    handleCurrent = handleInner;
+                    General.Interface.SetCursor(Cursors.Cross);
+                    return;
+                }
+            }
         }
 
         protected override void OnEditEnd() {
             base.OnEditEnd();
 
-            //if the opening edit was cancelled before letting go of the mouse then do no further processing
-            if (!isCreating)
-                return;
-            isCreating = false;
+            if (isCreating) {
+                //if the opening edit was cancelled before letting go of the mouse then do no further processing
+                isCreating = false;
 
-            handleOuter.Position = GetCurrentPosition();
-            if ((handleOuter.Position - handleInner.Position).GetLength() == 0) {
-                handleInner = null;
-                handleOuter = null;
-                return;
+                handleOuter.Position = GetCurrentPosition();
+                if ((handleOuter.Position - handleInner.Position).GetLength() == 0) {
+                    handleInner = null;
+                    handleOuter = null;
+                    return;
+                }
+
+                tbAddSide.Enabled = true;
+                tbRemoveSide.Enabled = true;
+                tbRotateOriginCW.Enabled = true;
+                tbRotateOriginCCW.Enabled = true;
+                tbSwapHandles.Enabled = true;
+                panel.EditState = true;
+
+                UpdateAll();
+            } else {
+                //since we were just dragging an existing handle, just let go of it
+                General.Interface.SetCursor(Cursors.Default);
+                handleCurrent = null;
             }
-
-            tbAddSide.Enabled = true;
-            tbRemoveSide.Enabled = true;
-            tbRotateOriginCW.Enabled = true;
-            tbRotateOriginCCW.Enabled = true;
-            tbSwapHandles.Enabled = true;
-            panel.EditState = true;
-
-            UpdateAll();
         }
 
         public override void OnRedrawDisplay() {
@@ -978,14 +1011,15 @@ namespace TriDelta.DrawCircleMode {
 
         protected override void OnDragStart(MouseEventArgs e) {
             base.OnDragStart(e);
+
+            //this differs from "EditStart", as this is a PRIMARY mouse click, rather than a SECONDARY one.
             if (handleInner != null) {
                 float gripsize = GRIP_SIZE / renderer.Scale;
-                if (handleOuter.isHovered(mousemappos, gripsize)) {
+                if (handleOuter.isHovered(MouseDownMapPos, gripsize)) {
                     handleCurrent = handleOuter;
                     General.Interface.SetCursor(Cursors.Cross);
                     return;
-                }
-                if (handleInner.isHovered(mousemappos, gripsize)) {
+                } else if (handleInner.isHovered(MouseDownMapPos, gripsize)) {
                     handleCurrent = handleInner;
                     General.Interface.SetCursor(Cursors.Cross);
                     return;

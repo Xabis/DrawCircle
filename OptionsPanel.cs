@@ -12,14 +12,17 @@ namespace TriDelta.DrawCircleMode {
         private DrawCircleMode mode;
         ToolTip helpToolLinedefLength = new ToolTip();
         ToolTip helpToolLinedefTotal = new ToolTip();
+        ToolTip helpToolAlwaysCreate = new ToolTip();
 
         public OptionsPanel(DrawCircleMode mode) {
             InitializeComponent();
             this.mode = mode;
 
             //help tooltips
-            helpToolLinedefLength.SetToolTip(this.lblDesiredLength, "Resizes the circle so that all linedefs match the desired length. Useful for fitting textures.");
-            helpToolLinedefTotal.SetToolTip(this.lblSetTotalLength, "Resizes the circle so that all linedefs total up to the desired length. Useful for wrapping a texture perfectly around a column.");
+            helpToolLinedefLength.SetToolTip(this.lblDesiredLength, "Resizes the circle so that all linedefs match the desired length.\n Useful for fitting textures.");
+            helpToolLinedefTotal.SetToolTip(this.lblSetTotalLength, "Resizes the circle so that all linedefs total up to the desired length.\n Useful for wrapping a texture perfectly around a column.");
+            helpToolAlwaysCreate.SetToolTip(this.chkAlwaysCreateOnEdit, "The drawing will be automatically reset\n when using the secondary mouse button.");
+
 
             //read tools settings
             udDesiredLength.Value = General.Settings.ReadPluginSetting("lastlinedeflength", 128);
@@ -34,6 +37,8 @@ namespace TriDelta.DrawCircleMode {
             chkFillCenter.Checked = mode.FillCenter;
             chkDrawSpokes.Checked = mode.DrawSpokes;
             chkDrawAnteSpokes.Checked = mode.DrawAnteSpokes;
+            chkAlwaysCreateOnEdit.Checked = mode.AlwaysCreateOnEdit;
+
             udSpokeSize.Value = (decimal)mode.SpokeThickness;
             udSpokeStart.Value = (decimal)mode.SpokeMinimum;
             udSideCount.Value = (decimal)mode.CircleSides;
@@ -135,6 +140,10 @@ namespace TriDelta.DrawCircleMode {
 
         private void udAnteSpokeStart_ValueChanged(object sender, EventArgs e) {
             mode.AnteSpokeMinimum = (float)udAnteSpokeStart.Value;
+        }
+
+        private void chkAlwaysCreateOnEdit_CheckedChanged(object sender, EventArgs e) {
+            mode.AlwaysCreateOnEdit = chkAlwaysCreateOnEdit.Checked;
         }
     }
 }
