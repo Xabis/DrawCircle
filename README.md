@@ -30,7 +30,7 @@ NEW for 2.0:
 * Up/Down boxes can now be incremented/decremented by 1, 0.1, 32, by holding shift, ctrl, alt, respectively.
 * Loosened sidedef requirements, so that it is possible to draw with 1 or 2 lines. This is useful for creating line guides of a specific angle and origin
 
-![new 2.0 features](https://raw.github.com/Xabis/DrawCircle/master/site/preview2.png)
+![new 2.0 features](https://raw.github.com/Xabis/DrawCircle/master/site/dc-preview2.png)
 
 Shortcuts
 ---------
