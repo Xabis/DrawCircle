@@ -19,8 +19,18 @@ Features
 * __HOLD__ Control to flip only the linedef snapping. Has no effect at all if the "never snap" option is enabled!
 * Size tools to let you resize the circle so that the linedefs all measure up to a desired length. Great for fitting textures on those columns.
 * Property editor to give you fine control over the angle and length of the guide for pixel-perfect scenarios.
-
 Note that the "Never Snap circle linedefs" option is enabled by default
+
+NEW for 2.0:
+------------
+* Can now specify a "thickness" for the circle, instead of the circle always being from the point of origin.
+* Can now optionally only fill in the outer circle, when thickness is used (sector will not be created for the center)
+* Can now optionally draw spokes and ante spokes along the vertex and line segments, respectively.
+* Control handles now always get preferential rendering
+* Up/Down boxes can now be incremented/decremented by 1, 0.1, 32, by holding shift, ctrl, alt, respectively.
+* Loosened sidedef requirements, so that it is possible to draw with 1 or 2 lines. This is useful for creating line guides of a specific angle and origin
+
+![new 2.0 features](https://raw.github.com/Xabis/DrawCircle/master/site/preview2.png)
 
 Shortcuts
 ---------
