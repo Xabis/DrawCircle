@@ -18,6 +18,8 @@ using System.Windows.Forms.Design;
 using CodeImp.DoomBuilder.Controls;
 
 namespace TriDelta.DrawCircleMode {
+    internal delegate void ModeChangedEvent(DrawCircleMode mode);
+
     [EditMode(
        DisplayName = "Draw Circle Mode",
        SwitchAction = "drawcirclemode",
@@ -82,6 +84,8 @@ namespace TriDelta.DrawCircleMode {
         private ToolStripItem tbSwapHandles;
 
         private float circleSegmentLength = 0f;
+
+        internal event ModeChangedEvent ModeChanged; 
 
         OptionsPanel panel;
         Docker docker;
@@ -220,9 +224,11 @@ namespace TriDelta.DrawCircleMode {
             set {
                 if (editSides != value) {
                     editSides = value;
-                    if (editSides < 2)
-                        editSides = 2;
+                    if (editSides < 1)
+                        editSides = 1;
                     General.Settings.WritePluginSetting("editsides", editSides);
+                    if (ModeChanged != null)
+                        ModeChanged(this);
                     Update();
                 }
             }

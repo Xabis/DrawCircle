@@ -28,13 +28,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tblProps = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
+            this.udSideCount = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.udThickness = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.udAngle = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.lblLength = new System.Windows.Forms.Label();
+            this.udLength = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
+            this.udAnteSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.udAnteSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.grpAppearance = new System.Windows.Forms.GroupBox();
+            this.chkAlwaysCreateOnEdit = new System.Windows.Forms.CheckBox();
             this.chkDrawAnteSpokes = new System.Windows.Forms.CheckBox();
             this.chkDrawSpokes = new System.Windows.Forms.CheckBox();
             this.chkFillCenter = new System.Windows.Forms.CheckBox();
@@ -49,21 +58,8 @@
             this.udDesiredLength = new System.Windows.Forms.NumericUpDown();
             this.cmdResizeToFit = new System.Windows.Forms.Button();
             this.lblDesiredLength = new System.Windows.Forms.Label();
-            this.chkAlwaysCreateOnEdit = new System.Windows.Forms.CheckBox();
-            this.udSideCount = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udThickness = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udAngle = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udLength = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udAnteSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.udAnteSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.grpProps.SuspendLayout();
             this.tblProps.SuspendLayout();
-            this.grpAppearance.SuspendLayout();
-            this.grpTools.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSideCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udThickness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).BeginInit();
@@ -72,6 +68,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeStart)).BeginInit();
+            this.grpAppearance.SuspendLayout();
+            this.grpTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAngle
@@ -157,6 +157,51 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "Ante Spoke Start:";
             // 
+            // udSideCount
+            // 
+            this.udSideCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udSideCount.AutoSize = true;
+            this.udSideCount.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udSideCount.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udSideCount.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udSideCount.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udSideCount.Location = new System.Drawing.Point(100, 3);
+            this.udSideCount.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.udSideCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udSideCount.Name = "udSideCount";
+            this.udSideCount.Size = new System.Drawing.Size(121, 20);
+            this.udSideCount.TabIndex = 10;
+            this.udSideCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udSideCount.ValueChanged += new System.EventHandler(this.udSideCount_ValueChanged);
+            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -187,6 +232,47 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Spoke Size:";
             // 
+            // udThickness
+            // 
+            this.udThickness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udThickness.AutoSize = true;
+            this.udThickness.DecimalPlaces = 1;
+            this.udThickness.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udThickness.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udThickness.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udThickness.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udThickness.Location = new System.Drawing.Point(100, 81);
+            this.udThickness.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udThickness.Minimum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            -2147483648});
+            this.udThickness.Name = "udThickness";
+            this.udThickness.Size = new System.Drawing.Size(121, 20);
+            this.udThickness.TabIndex = 5;
+            this.udThickness.ValueChanged += new System.EventHandler(this.udThickness_ValueChanged);
+            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -196,6 +282,47 @@
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Thickness:";
+            // 
+            // udAngle
+            // 
+            this.udAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udAngle.AutoSize = true;
+            this.udAngle.DecimalPlaces = 1;
+            this.udAngle.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udAngle.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udAngle.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udAngle.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udAngle.Location = new System.Drawing.Point(100, 29);
+            this.udAngle.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.udAngle.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.udAngle.Name = "udAngle";
+            this.udAngle.Size = new System.Drawing.Size(121, 20);
+            this.udAngle.TabIndex = 1;
+            this.udAngle.ValueChanged += new System.EventHandler(this.udAngle_ValueChanged);
             // 
             // lblLength
             // 
@@ -207,6 +334,119 @@
             this.lblLength.TabIndex = 2;
             this.lblLength.Text = "Length:";
             // 
+            // udLength
+            // 
+            this.udLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udLength.AutoSize = true;
+            this.udLength.DecimalPlaces = 1;
+            this.udLength.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udLength.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udLength.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udLength.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLength.Location = new System.Drawing.Point(100, 55);
+            this.udLength.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udLength.Name = "udLength";
+            this.udLength.Size = new System.Drawing.Size(121, 20);
+            this.udLength.TabIndex = 3;
+            this.udLength.ValueChanged += new System.EventHandler(this.udLength_ValueChanged);
+            // 
+            // udSpokeSize
+            // 
+            this.udSpokeSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udSpokeSize.AutoSize = true;
+            this.udSpokeSize.DecimalPlaces = 1;
+            this.udSpokeSize.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udSpokeSize.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udSpokeSize.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udSpokeSize.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udSpokeSize.Location = new System.Drawing.Point(100, 107);
+            this.udSpokeSize.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udSpokeSize.Name = "udSpokeSize";
+            this.udSpokeSize.Size = new System.Drawing.Size(121, 20);
+            this.udSpokeSize.TabIndex = 7;
+            this.udSpokeSize.ValueChanged += new System.EventHandler(this.udSpokeSize_ValueChanged);
+            // 
+            // udSpokeStart
+            // 
+            this.udSpokeStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udSpokeStart.AutoSize = true;
+            this.udSpokeStart.DecimalPlaces = 1;
+            this.udSpokeStart.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udSpokeStart.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udSpokeStart.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udSpokeStart.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udSpokeStart.Location = new System.Drawing.Point(100, 133);
+            this.udSpokeStart.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udSpokeStart.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.udSpokeStart.Name = "udSpokeStart";
+            this.udSpokeStart.Size = new System.Drawing.Size(121, 20);
+            this.udSpokeStart.TabIndex = 9;
+            this.udSpokeStart.ValueChanged += new System.EventHandler(this.udSpokeStart_ValueChanged);
+            // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -216,6 +456,83 @@
             this.label6.Size = new System.Drawing.Size(91, 13);
             this.label6.TabIndex = 11;
             this.label6.Text = "Ante Spoke Size:";
+            // 
+            // udAnteSpokeSize
+            // 
+            this.udAnteSpokeSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udAnteSpokeSize.AutoSize = true;
+            this.udAnteSpokeSize.DecimalPlaces = 1;
+            this.udAnteSpokeSize.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udAnteSpokeSize.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udAnteSpokeSize.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udAnteSpokeSize.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udAnteSpokeSize.Location = new System.Drawing.Point(100, 159);
+            this.udAnteSpokeSize.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udAnteSpokeSize.Name = "udAnteSpokeSize";
+            this.udAnteSpokeSize.Size = new System.Drawing.Size(121, 20);
+            this.udAnteSpokeSize.TabIndex = 13;
+            this.udAnteSpokeSize.ValueChanged += new System.EventHandler(this.udAnteSpokeSize_ValueChanged);
+            // 
+            // udAnteSpokeStart
+            // 
+            this.udAnteSpokeStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udAnteSpokeStart.AutoSize = true;
+            this.udAnteSpokeStart.DecimalPlaces = 1;
+            this.udAnteSpokeStart.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udAnteSpokeStart.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udAnteSpokeStart.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udAnteSpokeStart.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udAnteSpokeStart.Location = new System.Drawing.Point(100, 185);
+            this.udAnteSpokeStart.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udAnteSpokeStart.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.udAnteSpokeStart.Name = "udAnteSpokeStart";
+            this.udAnteSpokeStart.Size = new System.Drawing.Size(121, 20);
+            this.udAnteSpokeStart.TabIndex = 14;
+            this.udAnteSpokeStart.ValueChanged += new System.EventHandler(this.udAnteSpokeStart_ValueChanged);
             // 
             // grpAppearance
             // 
@@ -236,6 +553,17 @@
             this.grpAppearance.TabIndex = 2;
             this.grpAppearance.TabStop = false;
             this.grpAppearance.Text = "Appearance";
+            // 
+            // chkAlwaysCreateOnEdit
+            // 
+            this.chkAlwaysCreateOnEdit.AutoSize = true;
+            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(13, 187);
+            this.chkAlwaysCreateOnEdit.Name = "chkAlwaysCreateOnEdit";
+            this.chkAlwaysCreateOnEdit.Size = new System.Drawing.Size(141, 17);
+            this.chkAlwaysCreateOnEdit.TabIndex = 7;
+            this.chkAlwaysCreateOnEdit.Text = "Always start over on edit";
+            this.chkAlwaysCreateOnEdit.UseVisualStyleBackColor = true;
+            this.chkAlwaysCreateOnEdit.CheckedChanged += new System.EventHandler(this.chkAlwaysCreateOnEdit_CheckedChanged);
             // 
             // chkDrawAnteSpokes
             // 
@@ -434,334 +762,6 @@
             this.lblDesiredLength.TabIndex = 1;
             this.lblDesiredLength.Text = "Set all linedefs to:";
             // 
-            // chkAlwaysCreateOnEdit
-            // 
-            this.chkAlwaysCreateOnEdit.AutoSize = true;
-            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(13, 187);
-            this.chkAlwaysCreateOnEdit.Name = "chkAlwaysCreateOnEdit";
-            this.chkAlwaysCreateOnEdit.Size = new System.Drawing.Size(141, 17);
-            this.chkAlwaysCreateOnEdit.TabIndex = 7;
-            this.chkAlwaysCreateOnEdit.Text = "Always start over on edit";
-            this.chkAlwaysCreateOnEdit.UseVisualStyleBackColor = true;
-            this.chkAlwaysCreateOnEdit.CheckedChanged += new System.EventHandler(this.chkAlwaysCreateOnEdit_CheckedChanged);
-            // 
-            // udSideCount
-            // 
-            this.udSideCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udSideCount.AutoSize = true;
-            this.udSideCount.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udSideCount.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udSideCount.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udSideCount.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udSideCount.Location = new System.Drawing.Point(100, 3);
-            this.udSideCount.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.udSideCount.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.udSideCount.Name = "udSideCount";
-            this.udSideCount.Size = new System.Drawing.Size(121, 20);
-            this.udSideCount.TabIndex = 10;
-            this.udSideCount.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.udSideCount.ValueChanged += new System.EventHandler(this.udSideCount_ValueChanged);
-            // 
-            // udThickness
-            // 
-            this.udThickness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udThickness.AutoSize = true;
-            this.udThickness.DecimalPlaces = 1;
-            this.udThickness.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udThickness.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udThickness.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udThickness.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udThickness.Location = new System.Drawing.Point(100, 81);
-            this.udThickness.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udThickness.Minimum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            -2147483648});
-            this.udThickness.Name = "udThickness";
-            this.udThickness.Size = new System.Drawing.Size(121, 20);
-            this.udThickness.TabIndex = 5;
-            this.udThickness.ValueChanged += new System.EventHandler(this.udThickness_ValueChanged);
-            // 
-            // udAngle
-            // 
-            this.udAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udAngle.AutoSize = true;
-            this.udAngle.DecimalPlaces = 1;
-            this.udAngle.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udAngle.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udAngle.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udAngle.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udAngle.Location = new System.Drawing.Point(100, 29);
-            this.udAngle.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.udAngle.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.udAngle.Name = "udAngle";
-            this.udAngle.Size = new System.Drawing.Size(121, 20);
-            this.udAngle.TabIndex = 1;
-            this.udAngle.ValueChanged += new System.EventHandler(this.udAngle_ValueChanged);
-            // 
-            // udLength
-            // 
-            this.udLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udLength.AutoSize = true;
-            this.udLength.DecimalPlaces = 1;
-            this.udLength.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udLength.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udLength.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udLength.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udLength.Location = new System.Drawing.Point(100, 55);
-            this.udLength.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udLength.Name = "udLength";
-            this.udLength.Size = new System.Drawing.Size(121, 20);
-            this.udLength.TabIndex = 3;
-            this.udLength.ValueChanged += new System.EventHandler(this.udLength_ValueChanged);
-            // 
-            // udSpokeSize
-            // 
-            this.udSpokeSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udSpokeSize.AutoSize = true;
-            this.udSpokeSize.DecimalPlaces = 1;
-            this.udSpokeSize.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udSpokeSize.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udSpokeSize.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udSpokeSize.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udSpokeSize.Location = new System.Drawing.Point(100, 107);
-            this.udSpokeSize.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udSpokeSize.Name = "udSpokeSize";
-            this.udSpokeSize.Size = new System.Drawing.Size(121, 20);
-            this.udSpokeSize.TabIndex = 7;
-            this.udSpokeSize.ValueChanged += new System.EventHandler(this.udSpokeSize_ValueChanged);
-            // 
-            // udSpokeStart
-            // 
-            this.udSpokeStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udSpokeStart.AutoSize = true;
-            this.udSpokeStart.DecimalPlaces = 1;
-            this.udSpokeStart.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udSpokeStart.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udSpokeStart.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udSpokeStart.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udSpokeStart.Location = new System.Drawing.Point(100, 133);
-            this.udSpokeStart.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udSpokeStart.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.udSpokeStart.Name = "udSpokeStart";
-            this.udSpokeStart.Size = new System.Drawing.Size(121, 20);
-            this.udSpokeStart.TabIndex = 9;
-            this.udSpokeStart.ValueChanged += new System.EventHandler(this.udSpokeStart_ValueChanged);
-            // 
-            // udAnteSpokeSize
-            // 
-            this.udAnteSpokeSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udAnteSpokeSize.AutoSize = true;
-            this.udAnteSpokeSize.DecimalPlaces = 1;
-            this.udAnteSpokeSize.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udAnteSpokeSize.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udAnteSpokeSize.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udAnteSpokeSize.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udAnteSpokeSize.Location = new System.Drawing.Point(100, 159);
-            this.udAnteSpokeSize.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udAnteSpokeSize.Name = "udAnteSpokeSize";
-            this.udAnteSpokeSize.Size = new System.Drawing.Size(121, 20);
-            this.udAnteSpokeSize.TabIndex = 13;
-            this.udAnteSpokeSize.ValueChanged += new System.EventHandler(this.udAnteSpokeSize_ValueChanged);
-            // 
-            // udAnteSpokeStart
-            // 
-            this.udAnteSpokeStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udAnteSpokeStart.AutoSize = true;
-            this.udAnteSpokeStart.DecimalPlaces = 1;
-            this.udAnteSpokeStart.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udAnteSpokeStart.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udAnteSpokeStart.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udAnteSpokeStart.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udAnteSpokeStart.Location = new System.Drawing.Point(100, 185);
-            this.udAnteSpokeStart.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udAnteSpokeStart.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.udAnteSpokeStart.Name = "udAnteSpokeStart";
-            this.udAnteSpokeStart.Size = new System.Drawing.Size(121, 20);
-            this.udAnteSpokeStart.TabIndex = 14;
-            this.udAnteSpokeStart.ValueChanged += new System.EventHandler(this.udAnteSpokeStart_ValueChanged);
-            // 
             // OptionsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -776,12 +776,6 @@
             this.grpProps.PerformLayout();
             this.tblProps.ResumeLayout(false);
             this.tblProps.PerformLayout();
-            this.grpAppearance.ResumeLayout(false);
-            this.grpAppearance.PerformLayout();
-            this.grpTools.ResumeLayout(false);
-            this.grpTools.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSideCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udThickness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).EndInit();
@@ -790,6 +784,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeStart)).EndInit();
+            this.grpAppearance.ResumeLayout(false);
+            this.grpAppearance.PerformLayout();
+            this.grpTools.ResumeLayout(false);
+            this.grpTools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -53,6 +53,12 @@ namespace TriDelta.DrawCircleMode {
 
             //set initial edit state
             EditState = false;
+
+            mode.ModeChanged += mode_ModeChanged;
+        }
+
+        private void mode_ModeChanged(DrawCircleMode mode) {
+            udSideCount.Value = (decimal)mode.CircleSides;
         }
 
         internal bool EditState {
