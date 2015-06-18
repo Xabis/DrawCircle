@@ -350,12 +350,14 @@ namespace TriDelta.DrawCircleMode {
 
         [BeginAction("addcirclesides")]
         public void IncreaseSides() {
-            CircleSides++;
+            if (handleInner != null && handleOuter != null)
+                CircleSides++;
         }
 
         [BeginAction("subcirclesides")]
         public void DecreaseSides() {
-            CircleSides--;
+            if (handleInner != null && handleOuter != null)
+                CircleSides--;
         }
 
         //==============================================================================================================
