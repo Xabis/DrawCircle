@@ -1114,7 +1114,7 @@ namespace TriDelta.DrawCircleMode {
                             if (General.Interface.AltState)
                                 v.stitch = false;
 
-                            shape[i] = v;
+                            shape[j] = v;
                         }
                     }
 
