@@ -1106,6 +1106,9 @@ namespace TriDelta.DrawCircleMode {
                 General.Map.UndoRedo.CreateUndo(textUndoEntry);
                 General.Interface.DisplayStatus(StatusType.Action, textStatusCreated);
 
+                // Clear selection
+                General.Map.Map.ClearAllSelected();
+
                 for (var i = 0; i < shapes.Count; i++) {
                     List<DrawnVertex> shape = shapes[i];
 
@@ -1128,13 +1131,11 @@ namespace TriDelta.DrawCircleMode {
 
                     // Make the drawing
                     Tools.DrawLines(shape);
+                    General.Map.Map.SelectMarkedLinedefs(true, true);
                 }
 
                 // Snap to map format accuracy
                 General.Map.Map.SnapAllToAccuracy();
-
-                // Clear selection
-                General.Map.Map.ClearAllSelected();
 
                 // Update cached values
                 General.Map.Map.Update();
