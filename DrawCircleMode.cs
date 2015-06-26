@@ -780,7 +780,7 @@ namespace TriDelta.DrawCircleMode {
                                 length = delta.GetLength();
 
                                 //display the length of the current linedef
-                                if (showlinelength) {
+                                if (showlinelength && length > 0f) {
                                     labelSizeLength.Text = Math.Round(length).ToString();
                                     labelSizeLength.Rectangle = new RectangleF(lastp.pos.x + delta.x * 0.5f, lastp.pos.y + delta.y * 0.5f, 0f, 0f);
                                     renderer.RenderText(labelSizeLength);
@@ -1046,12 +1046,19 @@ namespace TriDelta.DrawCircleMode {
         public override void OnMouseMove(MouseEventArgs e) {
             base.OnMouseMove(e);
 
+            float gripsize = GRIP_SIZE / renderer.Scale;
             if (handleCurrent != null) {
                 handleCurrent.Position = GetCurrentPosition();
                 UpdateAll();
             } else if (isCreating) {
                 handleOuter.Position = GetCurrentPosition();
                 UpdateAll();
+            } else if (handleOuter != null && handleOuter.isHovered(MouseMapPos, gripsize)) {
+                General.Interface.SetCursor(Cursors.Hand);
+            } else if (handleInner != null && handleInner.isHovered(MouseMapPos, gripsize)) {
+                General.Interface.SetCursor(Cursors.Hand);
+            } else {
+                General.Interface.SetCursor(Cursors.Default);
             }
         }
 
