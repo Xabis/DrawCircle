@@ -35,6 +35,7 @@ namespace TriDelta.DrawCircleMode {
             chkShowSideCount.Checked = mode.ShowSideCount;
             chkNeverSnapCircle.Checked = mode.NeverSnapCircle;
             chkFillCenter.Checked = mode.FillCenter;
+            chkDrawOffset.Checked = mode.DrawOffset;
             chkDrawSpokes.Checked = mode.DrawSpokes;
             chkDrawAnteSpokes.Checked = mode.DrawAnteSpokes;
             chkAlwaysCreateOnEdit.Checked = mode.AlwaysCreateOnEdit;
@@ -150,6 +151,10 @@ namespace TriDelta.DrawCircleMode {
 
         private void chkAlwaysCreateOnEdit_CheckedChanged(object sender, EventArgs e) {
             mode.AlwaysCreateOnEdit = chkAlwaysCreateOnEdit.Checked;
+        }
+
+        private void chkDrawOffset_CheckedChanged(object sender, EventArgs e) {
+            mode.DrawOffset = chkDrawOffset.Checked;
         }
     }
 }

@@ -61,6 +61,7 @@ namespace TriDelta.DrawCircleMode {
         private bool showlinetotal;
         private bool showsidecount;
 
+        private bool drawoffset;
         private bool drawspokes;
         private bool drawantespokes;
 
@@ -85,7 +86,9 @@ namespace TriDelta.DrawCircleMode {
 
         private float circleSegmentLength = 0f;
 
-        internal event ModeChangedEvent ModeChanged; 
+        internal event ModeChangedEvent ModeChanged;
+
+        private const double rightrads = 1.5707963267948966;
 
         OptionsPanel panel;
         Docker docker;
@@ -117,6 +120,7 @@ namespace TriDelta.DrawCircleMode {
             neversnapcircle = General.Settings.ReadPluginSetting("neversnapcircle", true);
             circleThickness = General.Settings.ReadPluginSetting("circlethickness", 0f);
             fillcenter = General.Settings.ReadPluginSetting("fillcenter", true);
+            drawoffset = General.Settings.ReadPluginSetting("drawoffset", false);
 
             drawspokes = General.Settings.ReadPluginSetting("drawspokes", false);
             spokethickness = General.Settings.ReadPluginSetting("spokethickness", 0f);
@@ -257,6 +261,16 @@ namespace TriDelta.DrawCircleMode {
             }
         }
 
+        internal bool DrawOffset {
+            get { return drawoffset; }
+            set {
+                if (drawoffset != value) {
+                    drawoffset = value;
+                    General.Settings.WritePluginSetting("drawoffset", drawoffset);
+                    Update();
+                }
+            }
+        }
 
         internal bool DrawSpokes {
             get { return drawspokes; }
@@ -477,6 +491,16 @@ namespace TriDelta.DrawCircleMode {
                 float originRads = (float)Math.Atan2(handleInner.Position.y - handleOuter.Position.y, handleInner.Position.x - handleOuter.Position.x);
                 float pointRads = (float)((Math.PI / (double)editSides) * 2);
                 float segcenterRads = pointRads / 2f;
+
+                //If the drawing is to be offset, then calculate new start and length
+                if (drawoffset) {
+                    //rotate origin by one-half segment
+                    originRads -= segcenterRads;
+
+                    //calculate the new circle length so that the segment lands firmly on the control handle                    
+                    double segangle = Math.PI - rightrads - segcenterRads;
+                    length = (float)Math.Abs(length / Math.Sin(segangle));
+                }
 
                 circleSegmentLength = 0f; //reset
 

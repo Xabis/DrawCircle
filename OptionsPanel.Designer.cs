@@ -43,6 +43,7 @@
             this.udAnteSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.udAnteSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.grpAppearance = new System.Windows.Forms.GroupBox();
+            this.chkDrawOffset = new System.Windows.Forms.CheckBox();
             this.chkAlwaysCreateOnEdit = new System.Windows.Forms.CheckBox();
             this.chkDrawAnteSpokes = new System.Windows.Forms.CheckBox();
             this.chkDrawSpokes = new System.Windows.Forms.CheckBox();
@@ -91,7 +92,7 @@
             this.grpProps.Controls.Add(this.label1);
             this.grpProps.Controls.Add(this.tblProps);
             this.grpProps.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpProps.Location = new System.Drawing.Point(0, 213);
+            this.grpProps.Location = new System.Drawing.Point(0, 238);
             this.grpProps.Name = "grpProps";
             this.grpProps.Padding = new System.Windows.Forms.Padding(15);
             this.grpProps.Size = new System.Drawing.Size(254, 264);
@@ -537,6 +538,7 @@
             // grpAppearance
             // 
             this.grpAppearance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpAppearance.Controls.Add(this.chkDrawOffset);
             this.grpAppearance.Controls.Add(this.chkAlwaysCreateOnEdit);
             this.grpAppearance.Controls.Add(this.chkDrawAnteSpokes);
             this.grpAppearance.Controls.Add(this.chkDrawSpokes);
@@ -549,15 +551,26 @@
             this.grpAppearance.Location = new System.Drawing.Point(0, 0);
             this.grpAppearance.Name = "grpAppearance";
             this.grpAppearance.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.grpAppearance.Size = new System.Drawing.Size(254, 213);
+            this.grpAppearance.Size = new System.Drawing.Size(254, 238);
             this.grpAppearance.TabIndex = 2;
             this.grpAppearance.TabStop = false;
             this.grpAppearance.Text = "Appearance";
             // 
+            // chkDrawOffset
+            // 
+            this.chkDrawOffset.AutoSize = true;
+            this.chkDrawOffset.Location = new System.Drawing.Point(13, 141);
+            this.chkDrawOffset.Name = "chkDrawOffset";
+            this.chkDrawOffset.Size = new System.Drawing.Size(164, 17);
+            this.chkDrawOffset.TabIndex = 8;
+            this.chkDrawOffset.Text = "Align segment against handle";
+            this.chkDrawOffset.UseVisualStyleBackColor = true;
+            this.chkDrawOffset.CheckedChanged += new System.EventHandler(this.chkDrawOffset_CheckedChanged);
+            // 
             // chkAlwaysCreateOnEdit
             // 
             this.chkAlwaysCreateOnEdit.AutoSize = true;
-            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(13, 187);
+            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(13, 210);
             this.chkAlwaysCreateOnEdit.Name = "chkAlwaysCreateOnEdit";
             this.chkAlwaysCreateOnEdit.Size = new System.Drawing.Size(141, 17);
             this.chkAlwaysCreateOnEdit.TabIndex = 7;
@@ -568,7 +581,7 @@
             // chkDrawAnteSpokes
             // 
             this.chkDrawAnteSpokes.AutoSize = true;
-            this.chkDrawAnteSpokes.Location = new System.Drawing.Point(13, 164);
+            this.chkDrawAnteSpokes.Location = new System.Drawing.Point(13, 187);
             this.chkDrawAnteSpokes.Name = "chkDrawAnteSpokes";
             this.chkDrawAnteSpokes.Size = new System.Drawing.Size(115, 17);
             this.chkDrawAnteSpokes.TabIndex = 6;
@@ -579,7 +592,7 @@
             // chkDrawSpokes
             // 
             this.chkDrawSpokes.AutoSize = true;
-            this.chkDrawSpokes.Location = new System.Drawing.Point(13, 141);
+            this.chkDrawSpokes.Location = new System.Drawing.Point(13, 164);
             this.chkDrawSpokes.Name = "chkDrawSpokes";
             this.chkDrawSpokes.Size = new System.Drawing.Size(90, 17);
             this.chkDrawSpokes.TabIndex = 5;
@@ -653,7 +666,7 @@
             this.grpTools.Controls.Add(this.cmdResizeToFit);
             this.grpTools.Controls.Add(this.lblDesiredLength);
             this.grpTools.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpTools.Location = new System.Drawing.Point(0, 477);
+            this.grpTools.Location = new System.Drawing.Point(0, 502);
             this.grpTools.Name = "grpTools";
             this.grpTools.Padding = new System.Windows.Forms.Padding(15);
             this.grpTools.Size = new System.Drawing.Size(254, 138);
@@ -771,7 +784,7 @@
             this.Controls.Add(this.grpProps);
             this.Controls.Add(this.grpAppearance);
             this.Name = "OptionsPanel";
-            this.Size = new System.Drawing.Size(254, 619);
+            this.Size = new System.Drawing.Size(254, 640);
             this.grpProps.ResumeLayout(false);
             this.grpProps.PerformLayout();
             this.tblProps.ResumeLayout(false);
@@ -832,5 +845,6 @@
         private VariableNumericUpDown udAnteSpokeSize;
         private VariableNumericUpDown udAnteSpokeStart;
         private System.Windows.Forms.CheckBox chkAlwaysCreateOnEdit;
+        private System.Windows.Forms.CheckBox chkDrawOffset;
     }
 }
