@@ -61,6 +61,7 @@ namespace TriDelta.DrawCircleMode {
         private bool showlinetotal;
         private bool showsidecount;
 
+        private bool drawcircle;
         private bool drawoffset;
         private bool drawspokes;
         private bool drawantespokes;
@@ -120,6 +121,7 @@ namespace TriDelta.DrawCircleMode {
             neversnapcircle = General.Settings.ReadPluginSetting("neversnapcircle", true);
             circleThickness = General.Settings.ReadPluginSetting("circlethickness", 0f);
             fillcenter = General.Settings.ReadPluginSetting("fillcenter", true);
+            drawcircle = General.Settings.ReadPluginSetting("drawcircle", true);
             drawoffset = General.Settings.ReadPluginSetting("drawoffset", false);
 
             drawspokes = General.Settings.ReadPluginSetting("drawspokes", false);
@@ -256,6 +258,17 @@ namespace TriDelta.DrawCircleMode {
                 if (fillcenter != value) {
                     fillcenter = value;
                     General.Settings.WritePluginSetting("fillcenter", fillcenter);
+                    Update();
+                }
+            }
+        }
+
+        internal bool DrawCircle {
+            get { return drawcircle; }
+            set {
+                if (drawcircle != value) {
+                    drawcircle = value;
+                    General.Settings.WritePluginSetting("drawcircle", drawcircle);
                     Update();
                 }
             }
@@ -509,64 +522,66 @@ namespace TriDelta.DrawCircleMode {
                 //---------------------------------------------------------------------------------
                 // Build the MAIN circle
                 //---------------------------------------------------------------------------------
-                for (int i = 0; i < editSides; i++) {
-                    //calculate where the vertex should go, based on the number of segments
-                    float rads = originRads + (pointRads * (float)i);
-                    DrawnVertex point = new DrawnVertex();
-                    point.stitch = true;
-                    point.stitchline = true;
-                    point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * length);
-                    point.pos.x = handleInner.Position.x - (float)(Math.Cos(rads) * length);
-                    if (snapcircletogrid)
-                        point.pos = General.Map.Grid.SnappedToGrid(point.pos);
-                    shape.Add(point);
-
-                    //measure the segment for the total length display
-                    if (i > 0) {
-                        delta = point.pos - last;
-                        circleSegmentLength += delta.GetLength();
-                    }
-                    last = point.pos;
-                }
-
-                //measure the last segment
-                delta = last - shape[0].pos;
-                circleSegmentLength += delta.GetLength();
-
-                shape.Add(shape[0]); //close it
-
-                //Build the OUTER circle (if configured)
-                if (circleThickness != 0f) {
-                    List<DrawnVertex> outershape = new List<DrawnVertex>();
-
-                    //calculate the spacing
-                    float outerlength = length + circleThickness;
-
-                    //create the points
+                if (drawcircle) {
                     for (int i = 0; i < editSides; i++) {
+                        //calculate where the vertex should go, based on the number of segments
                         float rads = originRads + (pointRads * (float)i);
                         DrawnVertex point = new DrawnVertex();
                         point.stitch = true;
                         point.stitchline = true;
-                        point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * outerlength);
-                        point.pos.x = handleInner.Position.x - (float)(Math.Cos(rads) * outerlength);
+                        point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * length);
+                        point.pos.x = handleInner.Position.x - (float)(Math.Cos(rads) * length);
                         if (snapcircletogrid)
                             point.pos = General.Map.Grid.SnappedToGrid(point.pos);
-                        outershape.Add(point);
-                    }
-                    outershape.Add(outershape[0]); //close it
+                        shape.Add(point);
 
-                    if (fillcenter) {
-                        //if we are filling, then both circles are two distintive shapes.
-                        shapes.Add(shape);          //add inner circle
-                        shapes.Add(outershape);     //add outer circle separately
+                        //measure the segment for the total length display
+                        if (i > 0) {
+                            delta = point.pos - last;
+                            circleSegmentLength += delta.GetLength();
+                        }
+                        last = point.pos;
+                    }
+
+                    //measure the last segment
+                    delta = last - shape[0].pos;
+                    circleSegmentLength += delta.GetLength();
+
+                    shape.Add(shape[0]); //close it
+
+                    //Build the OUTER circle (if configured)
+                    if (circleThickness != 0f) {
+                        List<DrawnVertex> outershape = new List<DrawnVertex>();
+
+                        //calculate the spacing
+                        float outerlength = length + circleThickness;
+
+                        //create the points
+                        for (int i = 0; i < editSides; i++) {
+                            float rads = originRads + (pointRads * (float)i);
+                            DrawnVertex point = new DrawnVertex();
+                            point.stitch = true;
+                            point.stitchline = true;
+                            point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * outerlength);
+                            point.pos.x = handleInner.Position.x - (float)(Math.Cos(rads) * outerlength);
+                            if (snapcircletogrid)
+                                point.pos = General.Map.Grid.SnappedToGrid(point.pos);
+                            outershape.Add(point);
+                        }
+                        outershape.Add(outershape[0]); //close it
+
+                        if (fillcenter) {
+                            //if we are filling, then both circles are two distintive shapes.
+                            shapes.Add(shape);          //add inner circle
+                            shapes.Add(outershape);     //add outer circle separately
+                        } else {
+                            //if not filling, then append the outer circle to the main one
+                            shape.AddRange(outershape);
+                            shapes.Add(shape);
+                        }
                     } else {
-                        //if not filling, then append the outer circle to the main one
-                        shape.AddRange(outershape);
                         shapes.Add(shape);
                     }
-                } else {
-                    shapes.Add(shape);
                 }
 
                 //---------------------------------------------------------------------------------

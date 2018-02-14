@@ -27,16 +27,16 @@
             this.grpProps = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tblProps = new System.Windows.Forms.TableLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
             this.udSideCount = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
+            this.udAngle = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.lblLength = new System.Windows.Forms.Label();
+            this.udLength = new TriDelta.DrawCircleMode.VariableNumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.udThickness = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.udAngle = new TriDelta.DrawCircleMode.VariableNumericUpDown();
-            this.lblLength = new System.Windows.Forms.Label();
-            this.udLength = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.udSpokeSize = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.udSpokeStart = new TriDelta.DrawCircleMode.VariableNumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,13 +45,13 @@
             this.grpAppearance = new System.Windows.Forms.GroupBox();
             this.chkDrawOffset = new System.Windows.Forms.CheckBox();
             this.chkAlwaysCreateOnEdit = new System.Windows.Forms.CheckBox();
-            this.chkDrawAnteSpokes = new System.Windows.Forms.CheckBox();
-            this.chkDrawSpokes = new System.Windows.Forms.CheckBox();
-            this.chkFillCenter = new System.Windows.Forms.CheckBox();
             this.chkNeverSnapCircle = new System.Windows.Forms.CheckBox();
             this.chkShowSideCount = new System.Windows.Forms.CheckBox();
             this.chkShowTotalLength = new System.Windows.Forms.CheckBox();
             this.chkShowLineLength = new System.Windows.Forms.CheckBox();
+            this.chkDrawAnteSpokes = new System.Windows.Forms.CheckBox();
+            this.chkDrawSpokes = new System.Windows.Forms.CheckBox();
+            this.chkFillCenter = new System.Windows.Forms.CheckBox();
             this.grpTools = new System.Windows.Forms.GroupBox();
             this.cmdSetTotalLength = new System.Windows.Forms.Button();
             this.udDesiredTotal = new System.Windows.Forms.NumericUpDown();
@@ -59,12 +59,19 @@
             this.udDesiredLength = new System.Windows.Forms.NumericUpDown();
             this.cmdResizeToFit = new System.Windows.Forms.Button();
             this.lblDesiredLength = new System.Windows.Forms.Label();
+            this.grpSpoke = new System.Windows.Forms.GroupBox();
+            this.tblSpoke = new System.Windows.Forms.TableLayoutPanel();
+            this.grpAnte = new System.Windows.Forms.GroupBox();
+            this.tblAnte = new System.Windows.Forms.TableLayoutPanel();
+            this.grpCircle = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.chkDrawCircle = new System.Windows.Forms.CheckBox();
             this.grpProps.SuspendLayout();
             this.tblProps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udSideCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udThickness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLength)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udThickness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeSize)).BeginInit();
@@ -73,6 +80,12 @@
             this.grpTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).BeginInit();
+            this.grpSpoke.SuspendLayout();
+            this.tblSpoke.SuspendLayout();
+            this.grpAnte.SuspendLayout();
+            this.tblAnte.SuspendLayout();
+            this.grpCircle.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAngle
@@ -81,21 +94,20 @@
             this.lblAngle.AutoSize = true;
             this.lblAngle.Location = new System.Drawing.Point(3, 32);
             this.lblAngle.Name = "lblAngle";
-            this.lblAngle.Size = new System.Drawing.Size(91, 13);
+            this.lblAngle.Size = new System.Drawing.Size(43, 13);
             this.lblAngle.TabIndex = 0;
             this.lblAngle.Text = "Angle:";
             // 
             // grpProps
             // 
-            this.grpProps.AutoSize = true;
             this.grpProps.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.grpProps.Controls.Add(this.label1);
             this.grpProps.Controls.Add(this.tblProps);
             this.grpProps.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpProps.Location = new System.Drawing.Point(0, 238);
+            this.grpProps.Location = new System.Drawing.Point(0, 168);
             this.grpProps.Name = "grpProps";
-            this.grpProps.Padding = new System.Windows.Forms.Padding(15);
-            this.grpProps.Size = new System.Drawing.Size(254, 264);
+            this.grpProps.Padding = new System.Windows.Forms.Padding(10);
+            this.grpProps.Size = new System.Drawing.Size(254, 123);
             this.grpProps.TabIndex = 1;
             this.grpProps.TabStop = false;
             this.grpProps.Text = "Properties";
@@ -104,7 +116,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(15, 236);
+            this.label1.Location = new System.Drawing.Point(10, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 13);
             this.label1.TabIndex = 1;
@@ -117,46 +129,25 @@
             this.tblProps.ColumnCount = 2;
             this.tblProps.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tblProps.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblProps.Controls.Add(this.label7, 0, 7);
             this.tblProps.Controls.Add(this.udSideCount, 1, 0);
             this.tblProps.Controls.Add(this.label5, 0, 0);
-            this.tblProps.Controls.Add(this.label4, 0, 5);
-            this.tblProps.Controls.Add(this.label3, 0, 4);
-            this.tblProps.Controls.Add(this.udThickness, 1, 3);
-            this.tblProps.Controls.Add(this.label2, 0, 3);
             this.tblProps.Controls.Add(this.udAngle, 1, 1);
             this.tblProps.Controls.Add(this.lblAngle, 0, 1);
             this.tblProps.Controls.Add(this.lblLength, 0, 2);
             this.tblProps.Controls.Add(this.udLength, 1, 2);
-            this.tblProps.Controls.Add(this.udSpokeSize, 1, 4);
-            this.tblProps.Controls.Add(this.udSpokeStart, 1, 5);
-            this.tblProps.Controls.Add(this.label6, 0, 6);
-            this.tblProps.Controls.Add(this.udAnteSpokeSize, 1, 6);
-            this.tblProps.Controls.Add(this.udAnteSpokeStart, 1, 7);
             this.tblProps.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblProps.Location = new System.Drawing.Point(15, 28);
+            this.tblProps.Location = new System.Drawing.Point(10, 23);
             this.tblProps.Name = "tblProps";
-            this.tblProps.RowCount = 8;
+            this.tblProps.RowCount = 4;
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblProps.Size = new System.Drawing.Size(224, 208);
+            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblProps.Size = new System.Drawing.Size(234, 78);
             this.tblProps.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 188);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Ante Spoke Start:";
             // 
             // udSideCount
             // 
@@ -182,7 +173,7 @@
             0,
             0,
             0});
-            this.udSideCount.Location = new System.Drawing.Point(100, 3);
+            this.udSideCount.Location = new System.Drawing.Point(52, 3);
             this.udSideCount.Maximum = new decimal(new int[] {
             360,
             0,
@@ -194,7 +185,7 @@
             0,
             0});
             this.udSideCount.Name = "udSideCount";
-            this.udSideCount.Size = new System.Drawing.Size(121, 20);
+            this.udSideCount.Size = new System.Drawing.Size(179, 20);
             this.udSideCount.TabIndex = 10;
             this.udSideCount.Value = new decimal(new int[] {
             1,
@@ -209,80 +200,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(3, 6);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Sides:";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Spoke Start:";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Spoke Size:";
-            // 
-            // udThickness
-            // 
-            this.udThickness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.udThickness.AutoSize = true;
-            this.udThickness.DecimalPlaces = 1;
-            this.udThickness.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udThickness.IncrementAlt = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.udThickness.IncrementCtrl = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udThickness.IncrementShift = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udThickness.Location = new System.Drawing.Point(100, 81);
-            this.udThickness.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.udThickness.Minimum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            -2147483648});
-            this.udThickness.Name = "udThickness";
-            this.udThickness.Size = new System.Drawing.Size(121, 20);
-            this.udThickness.TabIndex = 5;
-            this.udThickness.ValueChanged += new System.EventHandler(this.udThickness_ValueChanged);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Thickness:";
             // 
             // udAngle
             // 
@@ -309,7 +229,7 @@
             0,
             0,
             0});
-            this.udAngle.Location = new System.Drawing.Point(100, 29);
+            this.udAngle.Location = new System.Drawing.Point(52, 29);
             this.udAngle.Maximum = new decimal(new int[] {
             360,
             0,
@@ -321,7 +241,7 @@
             0,
             -2147483648});
             this.udAngle.Name = "udAngle";
-            this.udAngle.Size = new System.Drawing.Size(121, 20);
+            this.udAngle.Size = new System.Drawing.Size(179, 20);
             this.udAngle.TabIndex = 1;
             this.udAngle.ValueChanged += new System.EventHandler(this.udAngle_ValueChanged);
             // 
@@ -331,7 +251,7 @@
             this.lblLength.AutoSize = true;
             this.lblLength.Location = new System.Drawing.Point(3, 58);
             this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(91, 13);
+            this.lblLength.Size = new System.Drawing.Size(43, 13);
             this.lblLength.TabIndex = 2;
             this.lblLength.Text = "Length:";
             // 
@@ -360,16 +280,97 @@
             0,
             0,
             0});
-            this.udLength.Location = new System.Drawing.Point(100, 55);
+            this.udLength.Location = new System.Drawing.Point(52, 55);
             this.udLength.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
             this.udLength.Name = "udLength";
-            this.udLength.Size = new System.Drawing.Size(121, 20);
+            this.udLength.Size = new System.Drawing.Size(179, 20);
             this.udLength.TabIndex = 3;
             this.udLength.ValueChanged += new System.EventHandler(this.udLength_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 32);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Ante Spoke Start:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Spoke Start:";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Spoke Size:";
+            // 
+            // udThickness
+            // 
+            this.udThickness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.udThickness.AutoSize = true;
+            this.udThickness.DecimalPlaces = 1;
+            this.udThickness.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udThickness.IncrementAlt = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udThickness.IncrementCtrl = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udThickness.IncrementShift = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udThickness.Location = new System.Drawing.Point(68, 3);
+            this.udThickness.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.udThickness.Minimum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            -2147483648});
+            this.udThickness.Name = "udThickness";
+            this.udThickness.Size = new System.Drawing.Size(163, 20);
+            this.udThickness.TabIndex = 5;
+            this.udThickness.ValueChanged += new System.EventHandler(this.udThickness_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Thickness:";
             // 
             // udSpokeSize
             // 
@@ -396,14 +397,14 @@
             0,
             0,
             0});
-            this.udSpokeSize.Location = new System.Drawing.Point(100, 107);
+            this.udSpokeSize.Location = new System.Drawing.Point(75, 3);
             this.udSpokeSize.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
             this.udSpokeSize.Name = "udSpokeSize";
-            this.udSpokeSize.Size = new System.Drawing.Size(121, 20);
+            this.udSpokeSize.Size = new System.Drawing.Size(156, 20);
             this.udSpokeSize.TabIndex = 7;
             this.udSpokeSize.ValueChanged += new System.EventHandler(this.udSpokeSize_ValueChanged);
             // 
@@ -432,7 +433,7 @@
             0,
             0,
             0});
-            this.udSpokeStart.Location = new System.Drawing.Point(100, 133);
+            this.udSpokeStart.Location = new System.Drawing.Point(75, 29);
             this.udSpokeStart.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -444,7 +445,7 @@
             0,
             -2147483648});
             this.udSpokeStart.Name = "udSpokeStart";
-            this.udSpokeStart.Size = new System.Drawing.Size(121, 20);
+            this.udSpokeStart.Size = new System.Drawing.Size(156, 20);
             this.udSpokeStart.TabIndex = 9;
             this.udSpokeStart.ValueChanged += new System.EventHandler(this.udSpokeStart_ValueChanged);
             // 
@@ -452,7 +453,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 162);
+            this.label6.Location = new System.Drawing.Point(3, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(91, 13);
             this.label6.TabIndex = 11;
@@ -483,14 +484,14 @@
             0,
             0,
             0});
-            this.udAnteSpokeSize.Location = new System.Drawing.Point(100, 159);
+            this.udAnteSpokeSize.Location = new System.Drawing.Point(100, 3);
             this.udAnteSpokeSize.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
             this.udAnteSpokeSize.Name = "udAnteSpokeSize";
-            this.udAnteSpokeSize.Size = new System.Drawing.Size(121, 20);
+            this.udAnteSpokeSize.Size = new System.Drawing.Size(131, 20);
             this.udAnteSpokeSize.TabIndex = 13;
             this.udAnteSpokeSize.ValueChanged += new System.EventHandler(this.udAnteSpokeSize_ValueChanged);
             // 
@@ -519,7 +520,7 @@
             0,
             0,
             0});
-            this.udAnteSpokeStart.Location = new System.Drawing.Point(100, 185);
+            this.udAnteSpokeStart.Location = new System.Drawing.Point(100, 29);
             this.udAnteSpokeStart.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -531,7 +532,7 @@
             0,
             -2147483648});
             this.udAnteSpokeStart.Name = "udAnteSpokeStart";
-            this.udAnteSpokeStart.Size = new System.Drawing.Size(121, 20);
+            this.udAnteSpokeStart.Size = new System.Drawing.Size(131, 20);
             this.udAnteSpokeStart.TabIndex = 14;
             this.udAnteSpokeStart.ValueChanged += new System.EventHandler(this.udAnteSpokeStart_ValueChanged);
             // 
@@ -540,9 +541,6 @@
             this.grpAppearance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.grpAppearance.Controls.Add(this.chkDrawOffset);
             this.grpAppearance.Controls.Add(this.chkAlwaysCreateOnEdit);
-            this.grpAppearance.Controls.Add(this.chkDrawAnteSpokes);
-            this.grpAppearance.Controls.Add(this.chkDrawSpokes);
-            this.grpAppearance.Controls.Add(this.chkFillCenter);
             this.grpAppearance.Controls.Add(this.chkNeverSnapCircle);
             this.grpAppearance.Controls.Add(this.chkShowSideCount);
             this.grpAppearance.Controls.Add(this.chkShowTotalLength);
@@ -551,7 +549,7 @@
             this.grpAppearance.Location = new System.Drawing.Point(0, 0);
             this.grpAppearance.Name = "grpAppearance";
             this.grpAppearance.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.grpAppearance.Size = new System.Drawing.Size(254, 238);
+            this.grpAppearance.Size = new System.Drawing.Size(254, 168);
             this.grpAppearance.TabIndex = 2;
             this.grpAppearance.TabStop = false;
             this.grpAppearance.Text = "Appearance";
@@ -559,7 +557,7 @@
             // chkDrawOffset
             // 
             this.chkDrawOffset.AutoSize = true;
-            this.chkDrawOffset.Location = new System.Drawing.Point(13, 141);
+            this.chkDrawOffset.Location = new System.Drawing.Point(12, 118);
             this.chkDrawOffset.Name = "chkDrawOffset";
             this.chkDrawOffset.Size = new System.Drawing.Size(164, 17);
             this.chkDrawOffset.TabIndex = 8;
@@ -570,7 +568,7 @@
             // chkAlwaysCreateOnEdit
             // 
             this.chkAlwaysCreateOnEdit.AutoSize = true;
-            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(13, 210);
+            this.chkAlwaysCreateOnEdit.Location = new System.Drawing.Point(12, 141);
             this.chkAlwaysCreateOnEdit.Name = "chkAlwaysCreateOnEdit";
             this.chkAlwaysCreateOnEdit.Size = new System.Drawing.Size(141, 17);
             this.chkAlwaysCreateOnEdit.TabIndex = 7;
@@ -578,47 +576,14 @@
             this.chkAlwaysCreateOnEdit.UseVisualStyleBackColor = true;
             this.chkAlwaysCreateOnEdit.CheckedChanged += new System.EventHandler(this.chkAlwaysCreateOnEdit_CheckedChanged);
             // 
-            // chkDrawAnteSpokes
-            // 
-            this.chkDrawAnteSpokes.AutoSize = true;
-            this.chkDrawAnteSpokes.Location = new System.Drawing.Point(13, 187);
-            this.chkDrawAnteSpokes.Name = "chkDrawAnteSpokes";
-            this.chkDrawAnteSpokes.Size = new System.Drawing.Size(115, 17);
-            this.chkDrawAnteSpokes.TabIndex = 6;
-            this.chkDrawAnteSpokes.Text = "Draw Ante Spokes";
-            this.chkDrawAnteSpokes.UseVisualStyleBackColor = true;
-            this.chkDrawAnteSpokes.CheckedChanged += new System.EventHandler(this.chkDrawAnteSpokes_CheckedChanged);
-            // 
-            // chkDrawSpokes
-            // 
-            this.chkDrawSpokes.AutoSize = true;
-            this.chkDrawSpokes.Location = new System.Drawing.Point(13, 164);
-            this.chkDrawSpokes.Name = "chkDrawSpokes";
-            this.chkDrawSpokes.Size = new System.Drawing.Size(90, 17);
-            this.chkDrawSpokes.TabIndex = 5;
-            this.chkDrawSpokes.Text = "Draw Spokes";
-            this.chkDrawSpokes.UseVisualStyleBackColor = true;
-            this.chkDrawSpokes.CheckedChanged += new System.EventHandler(this.chkDrawSpokes_CheckedChanged);
-            // 
-            // chkFillCenter
-            // 
-            this.chkFillCenter.AutoSize = true;
-            this.chkFillCenter.Location = new System.Drawing.Point(13, 118);
-            this.chkFillCenter.Name = "chkFillCenter";
-            this.chkFillCenter.Size = new System.Drawing.Size(184, 17);
-            this.chkFillCenter.TabIndex = 4;
-            this.chkFillCenter.Text = "Fill center when thickness is used";
-            this.chkFillCenter.UseVisualStyleBackColor = true;
-            this.chkFillCenter.CheckedChanged += new System.EventHandler(this.chkFillCenter_CheckedChanged);
-            // 
             // chkNeverSnapCircle
             // 
             this.chkNeverSnapCircle.AutoSize = true;
-            this.chkNeverSnapCircle.Location = new System.Drawing.Point(13, 95);
+            this.chkNeverSnapCircle.Location = new System.Drawing.Point(12, 95);
             this.chkNeverSnapCircle.Name = "chkNeverSnapCircle";
-            this.chkNeverSnapCircle.Size = new System.Drawing.Size(141, 17);
+            this.chkNeverSnapCircle.Size = new System.Drawing.Size(153, 17);
             this.chkNeverSnapCircle.TabIndex = 3;
-            this.chkNeverSnapCircle.Text = "Never snap circle to grid";
+            this.chkNeverSnapCircle.Text = "Never snap vertices to grid";
             this.chkNeverSnapCircle.UseVisualStyleBackColor = true;
             this.chkNeverSnapCircle.CheckedChanged += new System.EventHandler(this.chkNeverSnapCircle_CheckedChanged);
             // 
@@ -655,9 +620,42 @@
             this.chkShowLineLength.UseVisualStyleBackColor = true;
             this.chkShowLineLength.CheckedChanged += new System.EventHandler(this.chkShowLineLength_CheckedChanged);
             // 
+            // chkDrawAnteSpokes
+            // 
+            this.chkDrawAnteSpokes.AutoSize = true;
+            this.chkDrawAnteSpokes.Location = new System.Drawing.Point(13, 0);
+            this.chkDrawAnteSpokes.Name = "chkDrawAnteSpokes";
+            this.chkDrawAnteSpokes.Size = new System.Drawing.Size(115, 17);
+            this.chkDrawAnteSpokes.TabIndex = 6;
+            this.chkDrawAnteSpokes.Text = "Draw Ante Spokes";
+            this.chkDrawAnteSpokes.UseVisualStyleBackColor = true;
+            this.chkDrawAnteSpokes.CheckedChanged += new System.EventHandler(this.chkDrawAnteSpokes_CheckedChanged);
+            // 
+            // chkDrawSpokes
+            // 
+            this.chkDrawSpokes.AutoSize = true;
+            this.chkDrawSpokes.Location = new System.Drawing.Point(13, 0);
+            this.chkDrawSpokes.Name = "chkDrawSpokes";
+            this.chkDrawSpokes.Size = new System.Drawing.Size(90, 17);
+            this.chkDrawSpokes.TabIndex = 5;
+            this.chkDrawSpokes.Text = "Draw Spokes";
+            this.chkDrawSpokes.UseVisualStyleBackColor = true;
+            this.chkDrawSpokes.CheckedChanged += new System.EventHandler(this.chkDrawSpokes_CheckedChanged);
+            // 
+            // chkFillCenter
+            // 
+            this.chkFillCenter.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.chkFillCenter, 2);
+            this.chkFillCenter.Location = new System.Drawing.Point(3, 29);
+            this.chkFillCenter.Name = "chkFillCenter";
+            this.chkFillCenter.Size = new System.Drawing.Size(184, 17);
+            this.chkFillCenter.TabIndex = 4;
+            this.chkFillCenter.Text = "Fill center when thickness is used";
+            this.chkFillCenter.UseVisualStyleBackColor = true;
+            this.chkFillCenter.CheckedChanged += new System.EventHandler(this.chkFillCenter_CheckedChanged);
+            // 
             // grpTools
             // 
-            this.grpTools.AutoSize = true;
             this.grpTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.grpTools.Controls.Add(this.cmdSetTotalLength);
             this.grpTools.Controls.Add(this.udDesiredTotal);
@@ -666,10 +664,10 @@
             this.grpTools.Controls.Add(this.cmdResizeToFit);
             this.grpTools.Controls.Add(this.lblDesiredLength);
             this.grpTools.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpTools.Location = new System.Drawing.Point(0, 502);
+            this.grpTools.Location = new System.Drawing.Point(0, 528);
             this.grpTools.Name = "grpTools";
-            this.grpTools.Padding = new System.Windows.Forms.Padding(15);
-            this.grpTools.Size = new System.Drawing.Size(254, 138);
+            this.grpTools.Padding = new System.Windows.Forms.Padding(10);
+            this.grpTools.Size = new System.Drawing.Size(254, 114);
             this.grpTools.TabIndex = 3;
             this.grpTools.TabStop = false;
             this.grpTools.Text = "Tools";
@@ -677,7 +675,7 @@
             // cmdSetTotalLength
             // 
             this.cmdSetTotalLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSetTotalLength.Location = new System.Drawing.Point(160, 84);
+            this.cmdSetTotalLength.Location = new System.Drawing.Point(165, 79);
             this.cmdSetTotalLength.Name = "cmdSetTotalLength";
             this.cmdSetTotalLength.Size = new System.Drawing.Size(75, 23);
             this.cmdSetTotalLength.TabIndex = 6;
@@ -694,7 +692,7 @@
             0,
             0,
             0});
-            this.udDesiredTotal.Location = new System.Drawing.Point(18, 87);
+            this.udDesiredTotal.Location = new System.Drawing.Point(13, 82);
             this.udDesiredTotal.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -706,7 +704,7 @@
             0,
             0});
             this.udDesiredTotal.Name = "udDesiredTotal";
-            this.udDesiredTotal.Size = new System.Drawing.Size(136, 20);
+            this.udDesiredTotal.Size = new System.Drawing.Size(146, 20);
             this.udDesiredTotal.TabIndex = 5;
             this.udDesiredTotal.Value = new decimal(new int[] {
             1,
@@ -718,7 +716,7 @@
             // 
             this.lblSetTotalLength.AutoSize = true;
             this.lblSetTotalLength.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblSetTotalLength.Location = new System.Drawing.Point(18, 71);
+            this.lblSetTotalLength.Location = new System.Drawing.Point(13, 66);
             this.lblSetTotalLength.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.lblSetTotalLength.Name = "lblSetTotalLength";
             this.lblSetTotalLength.Size = new System.Drawing.Size(127, 13);
@@ -734,7 +732,7 @@
             0,
             0,
             0});
-            this.udDesiredLength.Location = new System.Drawing.Point(18, 45);
+            this.udDesiredLength.Location = new System.Drawing.Point(13, 40);
             this.udDesiredLength.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -746,7 +744,7 @@
             0,
             0});
             this.udDesiredLength.Name = "udDesiredLength";
-            this.udDesiredLength.Size = new System.Drawing.Size(137, 20);
+            this.udDesiredLength.Size = new System.Drawing.Size(147, 20);
             this.udDesiredLength.TabIndex = 3;
             this.udDesiredLength.Value = new decimal(new int[] {
             1,
@@ -757,7 +755,7 @@
             // cmdResizeToFit
             // 
             this.cmdResizeToFit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdResizeToFit.Location = new System.Drawing.Point(161, 42);
+            this.cmdResizeToFit.Location = new System.Drawing.Point(166, 37);
             this.cmdResizeToFit.Name = "cmdResizeToFit";
             this.cmdResizeToFit.Size = new System.Drawing.Size(75, 23);
             this.cmdResizeToFit.TabIndex = 2;
@@ -769,11 +767,115 @@
             // 
             this.lblDesiredLength.AutoSize = true;
             this.lblDesiredLength.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblDesiredLength.Location = new System.Drawing.Point(18, 28);
+            this.lblDesiredLength.Location = new System.Drawing.Point(13, 23);
             this.lblDesiredLength.Name = "lblDesiredLength";
             this.lblDesiredLength.Size = new System.Drawing.Size(90, 13);
             this.lblDesiredLength.TabIndex = 1;
             this.lblDesiredLength.Text = "Set all linedefs to:";
+            // 
+            // grpSpoke
+            // 
+            this.grpSpoke.AutoSize = true;
+            this.grpSpoke.Controls.Add(this.tblSpoke);
+            this.grpSpoke.Controls.Add(this.chkDrawSpokes);
+            this.grpSpoke.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpSpoke.Location = new System.Drawing.Point(0, 370);
+            this.grpSpoke.Name = "grpSpoke";
+            this.grpSpoke.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
+            this.grpSpoke.Size = new System.Drawing.Size(254, 78);
+            this.grpSpoke.TabIndex = 4;
+            this.grpSpoke.TabStop = false;
+            // 
+            // tblSpoke
+            // 
+            this.tblSpoke.AutoSize = true;
+            this.tblSpoke.ColumnCount = 2;
+            this.tblSpoke.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblSpoke.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblSpoke.Controls.Add(this.label3, 0, 0);
+            this.tblSpoke.Controls.Add(this.udSpokeSize, 1, 0);
+            this.tblSpoke.Controls.Add(this.label4, 0, 1);
+            this.tblSpoke.Controls.Add(this.udSpokeStart, 1, 1);
+            this.tblSpoke.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tblSpoke.Location = new System.Drawing.Point(10, 16);
+            this.tblSpoke.Name = "tblSpoke";
+            this.tblSpoke.RowCount = 2;
+            this.tblSpoke.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblSpoke.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblSpoke.Size = new System.Drawing.Size(234, 52);
+            this.tblSpoke.TabIndex = 6;
+            // 
+            // grpAnte
+            // 
+            this.grpAnte.Controls.Add(this.tblAnte);
+            this.grpAnte.Controls.Add(this.chkDrawAnteSpokes);
+            this.grpAnte.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpAnte.Location = new System.Drawing.Point(0, 448);
+            this.grpAnte.Name = "grpAnte";
+            this.grpAnte.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
+            this.grpAnte.Size = new System.Drawing.Size(254, 80);
+            this.grpAnte.TabIndex = 5;
+            this.grpAnte.TabStop = false;
+            // 
+            // tblAnte
+            // 
+            this.tblAnte.AutoSize = true;
+            this.tblAnte.ColumnCount = 2;
+            this.tblAnte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblAnte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblAnte.Controls.Add(this.label7, 0, 1);
+            this.tblAnte.Controls.Add(this.label6, 0, 0);
+            this.tblAnte.Controls.Add(this.udAnteSpokeSize, 1, 0);
+            this.tblAnte.Controls.Add(this.udAnteSpokeStart, 1, 1);
+            this.tblAnte.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tblAnte.Location = new System.Drawing.Point(10, 16);
+            this.tblAnte.Name = "tblAnte";
+            this.tblAnte.RowCount = 2;
+            this.tblAnte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblAnte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblAnte.Size = new System.Drawing.Size(234, 52);
+            this.tblAnte.TabIndex = 7;
+            // 
+            // grpCircle
+            // 
+            this.grpCircle.Controls.Add(this.tableLayoutPanel1);
+            this.grpCircle.Controls.Add(this.chkDrawCircle);
+            this.grpCircle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpCircle.Location = new System.Drawing.Point(0, 291);
+            this.grpCircle.Name = "grpCircle";
+            this.grpCircle.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
+            this.grpCircle.Size = new System.Drawing.Size(254, 79);
+            this.grpCircle.TabIndex = 6;
+            this.grpCircle.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.udThickness, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chkFillCenter, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(234, 49);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // chkDrawCircle
+            // 
+            this.chkDrawCircle.AutoSize = true;
+            this.chkDrawCircle.Location = new System.Drawing.Point(13, 0);
+            this.chkDrawCircle.Name = "chkDrawCircle";
+            this.chkDrawCircle.Size = new System.Drawing.Size(80, 17);
+            this.chkDrawCircle.TabIndex = 0;
+            this.chkDrawCircle.Text = "Draw Circle";
+            this.chkDrawCircle.UseVisualStyleBackColor = true;
+            this.chkDrawCircle.CheckedChanged += new System.EventHandler(this.chkDrawCircle_CheckedChanged);
             // 
             // OptionsPanel
             // 
@@ -781,18 +883,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.grpTools);
+            this.Controls.Add(this.grpAnte);
+            this.Controls.Add(this.grpSpoke);
+            this.Controls.Add(this.grpCircle);
             this.Controls.Add(this.grpProps);
             this.Controls.Add(this.grpAppearance);
             this.Name = "OptionsPanel";
-            this.Size = new System.Drawing.Size(254, 640);
+            this.Size = new System.Drawing.Size(254, 653);
             this.grpProps.ResumeLayout(false);
             this.grpProps.PerformLayout();
             this.tblProps.ResumeLayout(false);
             this.tblProps.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udSideCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udThickness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLength)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udThickness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udSpokeStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAnteSpokeSize)).EndInit();
@@ -803,6 +908,18 @@
             this.grpTools.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udDesiredTotal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDesiredLength)).EndInit();
+            this.grpSpoke.ResumeLayout(false);
+            this.grpSpoke.PerformLayout();
+            this.tblSpoke.ResumeLayout(false);
+            this.tblSpoke.PerformLayout();
+            this.grpAnte.ResumeLayout(false);
+            this.grpAnte.PerformLayout();
+            this.tblAnte.ResumeLayout(false);
+            this.tblAnte.PerformLayout();
+            this.grpCircle.ResumeLayout(false);
+            this.grpCircle.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -846,5 +963,12 @@
         private VariableNumericUpDown udAnteSpokeStart;
         private System.Windows.Forms.CheckBox chkAlwaysCreateOnEdit;
         private System.Windows.Forms.CheckBox chkDrawOffset;
+        private System.Windows.Forms.GroupBox grpSpoke;
+        private System.Windows.Forms.TableLayoutPanel tblSpoke;
+        private System.Windows.Forms.GroupBox grpAnte;
+        private System.Windows.Forms.TableLayoutPanel tblAnte;
+        private System.Windows.Forms.GroupBox grpCircle;
+        private System.Windows.Forms.CheckBox chkDrawCircle;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

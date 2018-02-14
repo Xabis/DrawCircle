@@ -35,6 +35,7 @@ namespace TriDelta.DrawCircleMode {
             chkShowSideCount.Checked = mode.ShowSideCount;
             chkNeverSnapCircle.Checked = mode.NeverSnapCircle;
             chkFillCenter.Checked = mode.FillCenter;
+            chkDrawCircle.Checked = mode.DrawCircle;
             chkDrawOffset.Checked = mode.DrawOffset;
             chkDrawSpokes.Checked = mode.DrawSpokes;
             chkDrawAnteSpokes.Checked = mode.DrawAnteSpokes;
@@ -45,6 +46,9 @@ namespace TriDelta.DrawCircleMode {
             udSideCount.Value = (decimal)mode.CircleSides;
             udAnteSpokeSize.Value = (decimal)mode.AnteSpokeThickness;
             udAnteSpokeStart.Value = (decimal)mode.AnteSpokeMinimum;
+
+            chkFillCenter.Enabled = chkDrawCircle.Checked;
+            udThickness.Enabled = chkDrawCircle.Checked;
 
             udSpokeSize.Enabled = chkDrawSpokes.Checked;
             udSpokeStart.Enabled = chkDrawSpokes.Checked;
@@ -155,6 +159,12 @@ namespace TriDelta.DrawCircleMode {
 
         private void chkDrawOffset_CheckedChanged(object sender, EventArgs e) {
             mode.DrawOffset = chkDrawOffset.Checked;
+        }
+
+        private void chkDrawCircle_CheckedChanged(object sender, EventArgs e) {
+            mode.DrawCircle = chkDrawCircle.Checked;
+            chkFillCenter.Enabled = chkDrawCircle.Checked;
+            udThickness.Enabled = chkDrawCircle.Checked;
         }
     }
 }
