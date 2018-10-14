@@ -166,5 +166,14 @@ namespace TriDelta.DrawCircleMode {
             chkFillCenter.Enabled = chkDrawCircle.Checked;
             udThickness.Enabled = chkDrawCircle.Checked;
         }
+
+        private void cmdRot90_Click(object sender, EventArgs e)
+        {
+            decimal val = udAngle.Value + 90;
+            if (val > 360)
+                val -= 360;
+            udAngle.Value = val;
+            mode.SetAngle((float)val, true);
+        }
     }
 }
