@@ -472,15 +472,16 @@ namespace TriDelta.DrawCircleMode {
 
         private void UpdateAngleBox() {
             //Update the angle box with the latest number
-            float originRads = (float)Math.Atan2(-(handleInner.Position.y - handleOuter.Position.y), -(handleInner.Position.x - handleOuter.Position.x));
+            Vector2D o = handleOuter.Position - handleInner.Position;
+            double originRads = Math.Atan2(o.y, o.x);
             if (originRads < 0)
-                originRads += (float)(Math.PI * 2);
+                originRads += (Math.PI * 2.0);
 
-            panel.SetAngleBox((decimal)(originRads * (180 / Math.PI)));
+            panel.SetAngleBox((float)(originRads * (180.0 / Math.PI)));
         }
 
         private void UpdateLengthBox() {
-            panel.SetLengthBox((decimal)(handleInner.Position - handleOuter.Position).GetLength());
+            panel.SetLengthBox((handleInner.Position - handleOuter.Position).GetLength());
         }
 
         //Flushes and rebuilds the circle vertex cache

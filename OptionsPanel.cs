@@ -14,6 +14,21 @@ namespace TriDelta.DrawCircleMode {
         ToolTip helpToolLinedefTotal = new ToolTip();
         ToolTip helpToolAlwaysCreate = new ToolTip();
 
+        //TRack last value for relative processing
+        int LastSides = 0;
+        float LastAngle = 0;
+        float LastLength = 0;
+        float LastThickness = 0;
+        float LastSpokeSize = 0;
+        float LastSpokeStart = 0;
+        float LastAnteSize = 0;
+        float LastAnteStart = 0;
+
+        //Angle/Len/Sides can be set bi-directionally, so need to track state to prevent unwanted updates
+        bool bUpdatingSides = false;
+        bool bUpdatingAngle = false;
+        bool bUpdatingLength = false;
+
         public OptionsPanel(DrawCircleMode mode) {
             InitializeComponent();
             this.mode = mode;
@@ -23,13 +38,11 @@ namespace TriDelta.DrawCircleMode {
             helpToolLinedefTotal.SetToolTip(this.lblSetTotalLength, "Resizes the circle so that all linedefs total up to the desired length.\n Useful for wrapping a texture perfectly around a column.");
             helpToolAlwaysCreate.SetToolTip(this.chkAlwaysCreateOnEdit, "The drawing will be automatically reset\n when using the secondary mouse button.");
 
-
             //read tools settings
             udDesiredLength.Value = General.Settings.ReadPluginSetting("lastlinedeflength", 128);
             udDesiredTotal.Value = General.Settings.ReadPluginSetting("lasttotallength", 256);
 
             //populate from the engine
-            udThickness.Value = (decimal)mode.CircleThickness;
             chkShowLineLength.Checked = mode.ShowLineLength;
             chkShowTotalLength.Checked = mode.ShowLineTotal;
             chkShowSideCount.Checked = mode.ShowSideCount;
@@ -41,11 +54,19 @@ namespace TriDelta.DrawCircleMode {
             chkDrawAnteSpokes.Checked = mode.DrawAnteSpokes;
             chkAlwaysCreateOnEdit.Checked = mode.AlwaysCreateOnEdit;
 
-            udSpokeSize.Value = (decimal)mode.SpokeThickness;
-            udSpokeStart.Value = (decimal)mode.SpokeMinimum;
-            udSideCount.Value = (decimal)mode.CircleSides;
-            udAnteSpokeSize.Value = (decimal)mode.AnteSpokeThickness;
-            udAnteSpokeStart.Value = (decimal)mode.AnteSpokeMinimum;
+            LastSides = mode.CircleSides;
+            LastThickness = mode.CircleThickness;
+            LastSpokeSize = mode.SpokeThickness;
+            LastSpokeStart = mode.SpokeMinimum;
+            LastAnteSize = mode.AnteSpokeThickness;
+            LastAnteStart = mode.AnteSpokeMinimum;
+
+            udSideCount.Text = LastSides.ToString();
+            udThickness.Text = LastThickness.ToString("0.###");
+            udSpokeSize.Text = LastSpokeSize.ToString("0.###");
+            udSpokeStart.Text = LastSpokeStart.ToString("0.###");
+            udAnteSpokeSize.Text = LastAnteSize.ToString("0.###");
+            udAnteSpokeStart.Text = LastAnteStart.ToString("0.###");
 
             chkFillCenter.Enabled = chkDrawCircle.Checked;
             udThickness.Enabled = chkDrawCircle.Checked;
@@ -63,7 +84,9 @@ namespace TriDelta.DrawCircleMode {
         }
 
         private void mode_ModeChanged(DrawCircleMode mode) {
-            udSideCount.Value = (decimal)mode.CircleSides;
+            if (bUpdatingSides)
+                return;
+            udSideCount.Text = mode.CircleSides.ToString();
         }
 
         internal bool EditState {
@@ -73,12 +96,18 @@ namespace TriDelta.DrawCircleMode {
             }
         }
 
-        internal void SetAngleBox(decimal value) {
-            udAngle.Value = value;
+        internal void SetAngleBox(float value) {
+            if (bUpdatingAngle)
+                return;
+            LastAngle = value;
+            udAngle.Text = value.ToString("0.###");
         }
 
-        internal void SetLengthBox(decimal value) {
-            udLength.Value = value;
+        internal void SetLengthBox(float value) {
+            if (bUpdatingLength)
+                return;
+            LastLength = value;
+            udLength.Text = value.ToString("0.###");
         }
 
         private void cmdResizeToFit_Click(object sender, EventArgs e) {
@@ -102,20 +131,6 @@ namespace TriDelta.DrawCircleMode {
         private void chkNeverSnapCircle_CheckedChanged(object sender, EventArgs e) {
             mode.NeverSnapCircle = chkNeverSnapCircle.Checked;
         }
-        private void udAngle_ValueChanged(object sender, EventArgs e) {
-            if (udAngle.Value < 0)
-                udAngle.Value = 359;
-            else if (udAngle.Value > 359)
-                udAngle.Value = 0;
-            mode.SetAngle((float)udAngle.Value, true);
-        }
-        private void udLength_ValueChanged(object sender, EventArgs e) {
-            mode.SetLength((float)udLength.Value, true);
-        }
-
-        private void udThickness_ValueChanged(object sender, EventArgs e) {
-            mode.CircleThickness = (float)udThickness.Value;
-        }
 
         private void chkFillCenter_CheckedChanged(object sender, EventArgs e) {
             mode.FillCenter = chkFillCenter.Checked;
@@ -127,30 +142,10 @@ namespace TriDelta.DrawCircleMode {
             udSpokeStart.Enabled = chkDrawSpokes.Checked;
         }
 
-        private void udSpokeSize_ValueChanged(object sender, EventArgs e) {
-            mode.SpokeThickness = (float)udSpokeSize.Value;
-        }
-
-        private void udSpokeStart_ValueChanged(object sender, EventArgs e) {
-            mode.SpokeMinimum = (float)udSpokeStart.Value;
-        }
-
-        private void udSideCount_ValueChanged(object sender, EventArgs e) {
-            mode.CircleSides = (int)udSideCount.Value;
-        }
-
         private void chkDrawAnteSpokes_CheckedChanged(object sender, EventArgs e) {
             mode.DrawAnteSpokes = chkDrawAnteSpokes.Checked;
             udAnteSpokeSize.Enabled = chkDrawAnteSpokes.Checked;
             udAnteSpokeStart.Enabled = chkDrawAnteSpokes.Checked;
-        }
-
-        private void udAnteSpokeSize_ValueChanged(object sender, EventArgs e) {
-            mode.AnteSpokeThickness = (float)udAnteSpokeSize.Value;
-        }
-
-        private void udAnteSpokeStart_ValueChanged(object sender, EventArgs e) {
-            mode.AnteSpokeMinimum = (float)udAnteSpokeStart.Value;
         }
 
         private void chkAlwaysCreateOnEdit_CheckedChanged(object sender, EventArgs e) {
@@ -167,13 +162,111 @@ namespace TriDelta.DrawCircleMode {
             udThickness.Enabled = chkDrawCircle.Checked;
         }
 
-        private void cmdRot90_Click(object sender, EventArgs e)
-        {
-            decimal val = udAngle.Value + 90;
-            if (val > 360)
-                val -= 360;
-            udAngle.Value = val;
-            mode.SetAngle((float)val, true);
+
+        //Side Count
+        //-------------------------------
+        private void UdSideCount_WhenTextChanged(object sender, EventArgs e) {
+            bUpdatingSides = true;
+            mode.CircleSides = udSideCount.GetResult(LastSides);
+            bUpdatingSides = false;
+        }
+        private void UdSideCount_Apply(object sender, EventArgs e) {
+            LastSides = udSideCount.GetResult(LastSides);
+            udSideCount.Text = LastSides.ToString();
+        }
+
+        //Angle
+        //-------------------------------
+        private void UpdateAngle(float value, bool apply = false) {
+            bUpdatingAngle = true;
+            if (value < 0)
+                value = 360 - Math.Abs(value % 360);
+            else if (value >= 360)
+                value = 0 + Math.Abs(value % 360);
+            mode.SetAngle(value, true);
+
+            //Only update if a modifier is not currently in place. Clamp to 3 digits and prevent exp notation.
+            float boxtext;
+            if (apply || float.TryParse(udAngle.Text, out boxtext)) {
+                udAngle.Text = value.ToString("0.###");
+                LastAngle = value;
+            }
+            bUpdatingAngle = false;
+        }
+        private void UdAngle_WhenTextChanged(object sender, EventArgs e) {
+            UpdateAngle(udAngle.GetResultFloat(LastAngle));
+        }
+        private void UdAngle_Apply(object sender, EventArgs e) {
+            UpdateAngle(udAngle.GetResultFloat(LastAngle), true);
+        }
+        private void cmdRot90_Click(object sender, EventArgs e) {
+            UpdateAngle(udAngle.GetResultFloat(LastAngle) + 90f);
+        }
+
+
+        //Length
+        //-------------------------------
+        private void UpdateLength(float value, bool apply = false) {
+            bUpdatingLength = true;
+            mode.SetLength(value);
+
+            //Only update if a modifier is not currently in place. Clamp to 3 digits and prevent exp notation.
+            float boxtext;
+            if (apply || float.TryParse(udLength.Text, out boxtext)) {
+                udLength.Text = value.ToString("0.###");
+                LastLength = value;
+            }
+            bUpdatingLength = false;
+        }
+        private void UdLength_WhenTextChanged(object sender, EventArgs e) {
+            UpdateLength(udLength.GetResultFloat(LastLength));
+        }
+        private void UdLength_Apply(object sender, EventArgs e) {
+            UpdateLength(udLength.GetResultFloat(LastLength), true);
+        }
+
+        //Thickness
+        //-------------------------------
+        private void UdThickness_WhenTextChanged(object sender, EventArgs e) {
+            mode.CircleThickness = udThickness.GetResultFloat(LastThickness);
+        }
+        private void UdThickness_Apply(object sender, EventArgs e) {
+            LastThickness = udThickness.GetResultFloat(LastThickness);
+            udThickness.Text = LastThickness.ToString();
+        }
+
+        //Spokes
+        //-------------------------------
+        private void UdSpokeSize_WhenTextChanged(object sender, EventArgs e) {
+            mode.SpokeThickness = udSpokeSize.GetResultFloat(LastSpokeSize);
+        }
+        private void UdSpokeSize_Apply(object sender, EventArgs e) {
+            LastSpokeSize = udSpokeSize.GetResultFloat(LastSpokeSize);
+            udSpokeSize.Text = LastSpokeSize.ToString();
+        }
+
+        private void UdSpokeStart_WhenButtonsClicked(object sender, EventArgs e) {
+            mode.SpokeMinimum = udSpokeStart.GetResultFloat(LastSpokeStart);
+        }
+        private void UdSpokeStart_Apply(object sender, EventArgs e) {
+            LastSpokeStart = udSpokeStart.GetResultFloat(LastSpokeStart);
+            udSpokeStart.Text = LastSpokeStart.ToString();
+        }
+
+        private void UdAnteSpokeSize_WhenTextChanged(object sender, EventArgs e) {
+            mode.AnteSpokeThickness = udAnteSpokeSize.GetResultFloat(LastAnteSize);
+        }
+        private void UdAnteSpokeSize_Apply(object sender, EventArgs e) {
+            LastAnteSize = udAnteSpokeSize.GetResultFloat(LastAnteSize);
+            udAnteSpokeSize.Text = LastAnteSize.ToString();
+        }
+
+        private void UdAnteSpokeStart_WhenTextChanged(object sender, EventArgs e) {
+            mode.AnteSpokeMinimum = udAnteSpokeStart.GetResultFloat(LastAnteStart);
+        }
+        private void UdAnteSpokeStart_Apply(object sender, EventArgs e) {
+            LastAnteStart = udAnteSpokeStart.GetResultFloat(LastAnteStart);
+            udAnteSpokeStart.Text = LastAnteStart.ToString();
         }
     }
 }
