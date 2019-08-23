@@ -399,7 +399,7 @@ namespace TriDelta.DrawCircleMode {
                 return;
 
             float length = (handleOuter.Position - handleInner.Position).GetLength();
-            float rads = (float)(angle * (Math.PI / 180)); //rotate 90 degrees to match what line label is defining as angle 0
+            double rads = angle * (Math.PI / 180);
             Vector2D position = new Vector2D(
                handleInner.Position.x + (float)(Math.Cos(rads) * length),
                handleInner.Position.y + (float)(Math.Sin(rads) * length)
@@ -419,7 +419,7 @@ namespace TriDelta.DrawCircleMode {
                 return;
 
             Vector2D O = handleOuter.Position - handleInner.Position;
-            double angle = -Math.Atan2(-O.y, O.x);
+            double angle = Math.Atan2(O.y, O.x);
             Vector2D position = new Vector2D(
                handleInner.Position.x + (float)(Math.Cos(angle) * length),
                handleInner.Position.y + (float)(Math.Sin(angle) * length)
@@ -432,20 +432,18 @@ namespace TriDelta.DrawCircleMode {
 
         //Moves the guide the specified number of vertexes along the path
         internal void RotateNodes(int nodes) {
-            RotateNodes(nodes, false);
-        }
-        internal void RotateNodes(int nodes, bool nosnap) {
             if (handleInner == null)
                 return;
 
-            float length = (handleOuter.Position - handleInner.Position).GetLength();
-            float originRads = (float)Math.Atan2(handleInner.Position.y - handleOuter.Position.y, handleInner.Position.x - handleOuter.Position.x);
-            float pointRads = (float)((Math.PI / (double)editSides) * 2);
+            Vector2D O = handleOuter.Position - handleInner.Position;
+            double length = O.GetLength();
+            double originRads = Math.Atan2(O.y, O.x);
+            double pointRads = (Math.PI / (double)editSides) * 2.0;
             Vector2D position = new Vector2D(
-               handleInner.Position.x - (float)(Math.Cos(originRads + (pointRads * (float)nodes)) * length),
-               handleInner.Position.y - (float)(Math.Sin(originRads + (pointRads * (float)nodes)) * length)
+               handleInner.Position.x + (float)(Math.Cos(originRads + pointRads * nodes) * length),
+               handleInner.Position.y + (float)(Math.Sin(originRads + pointRads * nodes) * length)
             );
-            handleOuter.Position = snapguidetogrid & !nosnap ? General.Map.Grid.SnappedToGrid(position) : position;
+            handleOuter.Position = position;
 
             UpdateAll();
         }
@@ -478,7 +476,8 @@ namespace TriDelta.DrawCircleMode {
             if (originRads < 0)
                 originRads += (Math.PI * 2.0);
 
-            panel.SetAngleBox((float)(originRads * (180.0 / Math.PI)));
+            //Precision is reduced on purpose here so that a slight rounding effect occurs during the degree conversion
+            panel.SetAngleBox((float)((float)originRads * (180.0 / Math.PI)));
         }
 
         private void UpdateLengthBox() {
