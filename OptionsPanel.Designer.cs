@@ -98,7 +98,7 @@
             this.grpProps.Location = new System.Drawing.Point(0, 168);
             this.grpProps.Name = "grpProps";
             this.grpProps.Padding = new System.Windows.Forms.Padding(10);
-            this.grpProps.Size = new System.Drawing.Size(329, 123);
+            this.grpProps.Size = new System.Drawing.Size(217, 123);
             this.grpProps.TabIndex = 6;
             this.grpProps.TabStop = false;
             this.grpProps.Text = "Properties";
@@ -126,7 +126,7 @@
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblProps.Size = new System.Drawing.Size(309, 90);
+            this.tblProps.Size = new System.Drawing.Size(197, 90);
             this.tblProps.TabIndex = 0;
             // 
             // udSideCount
@@ -146,7 +146,7 @@
             this.udSideCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udSideCount.Location = new System.Drawing.Point(52, 3);
             this.udSideCount.Name = "udSideCount";
-            this.udSideCount.Size = new System.Drawing.Size(254, 24);
+            this.udSideCount.Size = new System.Drawing.Size(142, 24);
             this.udSideCount.StepValues = null;
             this.udSideCount.TabIndex = 6;
             this.udSideCount.WhenTextChanged += new System.EventHandler(this.UdSideCount_WhenTextChanged);
@@ -170,7 +170,7 @@
             this.udLength.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udLength.Location = new System.Drawing.Point(52, 63);
             this.udLength.Name = "udLength";
-            this.udLength.Size = new System.Drawing.Size(254, 24);
+            this.udLength.Size = new System.Drawing.Size(142, 24);
             this.udLength.StepValues = null;
             this.udLength.TabIndex = 9;
             this.udLength.WhenTextChanged += new System.EventHandler(this.UdLength_WhenTextChanged);
@@ -193,7 +193,7 @@
             this.udAngle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udAngle.Location = new System.Drawing.Point(52, 33);
             this.udAngle.Name = "udAngle";
-            this.udAngle.Size = new System.Drawing.Size(210, 24);
+            this.udAngle.Size = new System.Drawing.Size(98, 24);
             this.udAngle.StepValues = null;
             this.udAngle.TabIndex = 7;
             this.udAngle.WhenTextChanged += new System.EventHandler(this.UdAngle_WhenTextChanged);
@@ -203,7 +203,7 @@
             // cmdRot90
             // 
             this.cmdRot90.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdRot90.Location = new System.Drawing.Point(268, 33);
+            this.cmdRot90.Location = new System.Drawing.Point(156, 33);
             this.cmdRot90.Name = "cmdRot90";
             this.cmdRot90.Size = new System.Drawing.Size(38, 23);
             this.cmdRot90.TabIndex = 8;
@@ -294,7 +294,7 @@
             this.grpAppearance.Location = new System.Drawing.Point(0, 0);
             this.grpAppearance.Name = "grpAppearance";
             this.grpAppearance.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.grpAppearance.Size = new System.Drawing.Size(329, 168);
+            this.grpAppearance.Size = new System.Drawing.Size(217, 168);
             this.grpAppearance.TabIndex = 0;
             this.grpAppearance.TabStop = false;
             this.grpAppearance.Text = "Appearance";
@@ -412,7 +412,7 @@
             this.grpTools.Location = new System.Drawing.Point(0, 536);
             this.grpTools.Name = "grpTools";
             this.grpTools.Padding = new System.Windows.Forms.Padding(10);
-            this.grpTools.Size = new System.Drawing.Size(329, 114);
+            this.grpTools.Size = new System.Drawing.Size(217, 114);
             this.grpTools.TabIndex = 19;
             this.grpTools.TabStop = false;
             this.grpTools.Text = "Tools";
@@ -420,7 +420,7 @@
             // cmdSetTotalLength
             // 
             this.cmdSetTotalLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSetTotalLength.Location = new System.Drawing.Point(240, 79);
+            this.cmdSetTotalLength.Location = new System.Drawing.Point(128, 79);
             this.cmdSetTotalLength.Name = "cmdSetTotalLength";
             this.cmdSetTotalLength.Size = new System.Drawing.Size(75, 23);
             this.cmdSetTotalLength.TabIndex = 22;
@@ -449,7 +449,7 @@
             0,
             0});
             this.udDesiredTotal.Name = "udDesiredTotal";
-            this.udDesiredTotal.Size = new System.Drawing.Size(221, 20);
+            this.udDesiredTotal.Size = new System.Drawing.Size(109, 20);
             this.udDesiredTotal.TabIndex = 21;
             this.udDesiredTotal.Value = new decimal(new int[] {
             1,
@@ -489,7 +489,7 @@
             0,
             0});
             this.udDesiredLength.Name = "udDesiredLength";
-            this.udDesiredLength.Size = new System.Drawing.Size(222, 20);
+            this.udDesiredLength.Size = new System.Drawing.Size(110, 20);
             this.udDesiredLength.TabIndex = 19;
             this.udDesiredLength.Value = new decimal(new int[] {
             1,
@@ -500,7 +500,7 @@
             // cmdResizeToFit
             // 
             this.cmdResizeToFit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdResizeToFit.Location = new System.Drawing.Point(241, 37);
+            this.cmdResizeToFit.Location = new System.Drawing.Point(129, 37);
             this.cmdResizeToFit.Name = "cmdResizeToFit";
             this.cmdResizeToFit.Size = new System.Drawing.Size(75, 23);
             this.cmdResizeToFit.TabIndex = 20;
@@ -527,7 +527,7 @@
             this.grpSpoke.Location = new System.Drawing.Point(0, 370);
             this.grpSpoke.Name = "grpSpoke";
             this.grpSpoke.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
-            this.grpSpoke.Size = new System.Drawing.Size(329, 86);
+            this.grpSpoke.Size = new System.Drawing.Size(217, 86);
             this.grpSpoke.TabIndex = 13;
             this.grpSpoke.TabStop = false;
             // 
@@ -547,7 +547,7 @@
             this.tblSpoke.RowCount = 2;
             this.tblSpoke.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblSpoke.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblSpoke.Size = new System.Drawing.Size(309, 60);
+            this.tblSpoke.Size = new System.Drawing.Size(197, 60);
             this.tblSpoke.TabIndex = 6;
             // 
             // udSpokeStart
@@ -566,7 +566,7 @@
             this.udSpokeStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udSpokeStart.Location = new System.Drawing.Point(75, 33);
             this.udSpokeStart.Name = "udSpokeStart";
-            this.udSpokeStart.Size = new System.Drawing.Size(238, 24);
+            this.udSpokeStart.Size = new System.Drawing.Size(119, 24);
             this.udSpokeStart.StepValues = null;
             this.udSpokeStart.TabIndex = 11;
             this.udSpokeStart.WhenButtonsClicked += new System.EventHandler(this.UdSpokeStart_WhenButtonsClicked);
@@ -589,7 +589,7 @@
             this.udSpokeSize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udSpokeSize.Location = new System.Drawing.Point(75, 3);
             this.udSpokeSize.Name = "udSpokeSize";
-            this.udSpokeSize.Size = new System.Drawing.Size(238, 24);
+            this.udSpokeSize.Size = new System.Drawing.Size(119, 24);
             this.udSpokeSize.StepValues = null;
             this.udSpokeSize.TabIndex = 9;
             this.udSpokeSize.WhenTextChanged += new System.EventHandler(this.UdSpokeSize_WhenTextChanged);
@@ -604,7 +604,7 @@
             this.grpAnte.Location = new System.Drawing.Point(0, 456);
             this.grpAnte.Name = "grpAnte";
             this.grpAnte.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
-            this.grpAnte.Size = new System.Drawing.Size(329, 80);
+            this.grpAnte.Size = new System.Drawing.Size(217, 80);
             this.grpAnte.TabIndex = 16;
             this.grpAnte.TabStop = false;
             // 
@@ -624,7 +624,7 @@
             this.tblAnte.RowCount = 2;
             this.tblAnte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblAnte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblAnte.Size = new System.Drawing.Size(309, 60);
+            this.tblAnte.Size = new System.Drawing.Size(197, 60);
             this.tblAnte.TabIndex = 7;
             // 
             // udAnteSpokeStart
@@ -643,7 +643,7 @@
             this.udAnteSpokeStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udAnteSpokeStart.Location = new System.Drawing.Point(100, 33);
             this.udAnteSpokeStart.Name = "udAnteSpokeStart";
-            this.udAnteSpokeStart.Size = new System.Drawing.Size(206, 24);
+            this.udAnteSpokeStart.Size = new System.Drawing.Size(94, 24);
             this.udAnteSpokeStart.StepValues = null;
             this.udAnteSpokeStart.TabIndex = 13;
             this.udAnteSpokeStart.WhenTextChanged += new System.EventHandler(this.UdAnteSpokeStart_WhenTextChanged);
@@ -666,7 +666,7 @@
             this.udAnteSpokeSize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udAnteSpokeSize.Location = new System.Drawing.Point(100, 3);
             this.udAnteSpokeSize.Name = "udAnteSpokeSize";
-            this.udAnteSpokeSize.Size = new System.Drawing.Size(206, 24);
+            this.udAnteSpokeSize.Size = new System.Drawing.Size(94, 24);
             this.udAnteSpokeSize.StepValues = null;
             this.udAnteSpokeSize.TabIndex = 12;
             this.udAnteSpokeSize.WhenTextChanged += new System.EventHandler(this.UdAnteSpokeSize_WhenTextChanged);
@@ -681,7 +681,7 @@
             this.grpCircle.Location = new System.Drawing.Point(0, 291);
             this.grpCircle.Name = "grpCircle";
             this.grpCircle.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
-            this.grpCircle.Size = new System.Drawing.Size(329, 79);
+            this.grpCircle.Size = new System.Drawing.Size(217, 79);
             this.grpCircle.TabIndex = 10;
             this.grpCircle.TabStop = false;
             // 
@@ -700,7 +700,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(309, 53);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(197, 53);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // udThickness
@@ -719,7 +719,7 @@
             this.udThickness.Dock = System.Windows.Forms.DockStyle.Fill;
             this.udThickness.Location = new System.Drawing.Point(68, 3);
             this.udThickness.Name = "udThickness";
-            this.udThickness.Size = new System.Drawing.Size(238, 24);
+            this.udThickness.Size = new System.Drawing.Size(126, 24);
             this.udThickness.StepValues = null;
             this.udThickness.TabIndex = 8;
             this.udThickness.WhenTextChanged += new System.EventHandler(this.UdThickness_WhenTextChanged);
@@ -749,7 +749,7 @@
             this.Controls.Add(this.grpProps);
             this.Controls.Add(this.grpAppearance);
             this.Name = "OptionsPanel";
-            this.Size = new System.Drawing.Size(329, 653);
+            this.Size = new System.Drawing.Size(217, 653);
             this.grpProps.ResumeLayout(false);
             this.grpProps.PerformLayout();
             this.tblProps.ResumeLayout(false);

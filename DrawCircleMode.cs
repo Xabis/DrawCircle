@@ -418,10 +418,11 @@ namespace TriDelta.DrawCircleMode {
             if (handleInner == null)
                 return;
 
-            float rads = (float)Math.Atan2(-(handleInner.Position.y - handleOuter.Position.y), -(handleInner.Position.x - handleOuter.Position.x));
+            Vector2D O = handleOuter.Position - handleInner.Position;
+            double angle = -Math.Atan2(-O.y, O.x);
             Vector2D position = new Vector2D(
-               handleInner.Position.x + (float)(Math.Cos(rads) * length),
-               handleInner.Position.y + (float)(Math.Sin(rads) * length)
+               handleInner.Position.x + (float)(Math.Cos(angle) * length),
+               handleInner.Position.y + (float)(Math.Sin(angle) * length)
             );
             handleOuter.Position = snapguidetogrid && !nosnap ? General.Map.Grid.SnappedToGrid(position) : position;
 

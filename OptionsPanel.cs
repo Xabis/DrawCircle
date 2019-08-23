@@ -208,7 +208,7 @@ namespace TriDelta.DrawCircleMode {
         //-------------------------------
         private void UpdateLength(float value, bool apply = false) {
             bUpdatingLength = true;
-            mode.SetLength(value);
+            mode.SetLength(value, true);
 
             //Only update if a modifier is not currently in place. Clamp to 3 digits and prevent exp notation.
             float boxtext;
