@@ -391,10 +391,10 @@ namespace TriDelta.DrawCircleMode {
         // Inner
         //==============================================================================================================
         //Moves the guide to match the specified angle
-        internal void SetAngle(float angle) {
+        internal void SetAngle(double angle) {
             SetAngle(angle, false);
         }
-        internal void SetAngle(float angle, bool nosnap) {
+        internal void SetAngle(double angle, bool nosnap) {
             if (handleInner == null)
                 return;
 
@@ -416,10 +416,10 @@ namespace TriDelta.DrawCircleMode {
         }
 
         //sets the guide to the specific length
-        internal void SetLength(float length) {
+        internal void SetLength(double length) {
             SetLength(length, false);
         }
-        internal void SetLength(float length, bool nosnap) {
+        internal void SetLength(double length, bool nosnap) {
             if (handleInner == null)
                 return;
 
@@ -462,9 +462,10 @@ namespace TriDelta.DrawCircleMode {
             if (handleInner == null || editSides < 3)
                 return;
 
-            double aoe = (360 / (float)editSides) / 2;
-            double rads = aoe * (Math.PI / 180);
-            float length = (float)((newlength / 2) / Math.Sin(rads)); //assume a right angle (sin(90) = 1)
+            double rads = Math.PI / editSides;
+            double length = newlength * 0.5 / Math.Sin(rads); //calculate new circumradius
+            if (drawoffset)
+                length *= Math.Cos(rads); //convert to apothem if offset mode is on
 
             SetLength(length, true);
             UpdateLengthBox();
@@ -486,7 +487,7 @@ namespace TriDelta.DrawCircleMode {
                 originRads += (Math.PI * 2.0);
 
             //Precision is reduced on purpose here so that a slight rounding effect occurs during the degree conversion
-            panel.SetAngleBox((float)((float)originRads * (180.0 / Math.PI)));
+            panel.SetAngleBox((float)(originRads * (180.0 / Math.PI)));
         }
 
         private void UpdateLengthBox() {
@@ -510,19 +511,15 @@ namespace TriDelta.DrawCircleMode {
 
                 //Calculate the angle and circle starting point
                 Vector2D delta = handleOuter.Position - handleInner.Position;
-                float length = delta.GetLength();
-                float originRads = (float)Math.Atan2(handleInner.Position.y - handleOuter.Position.y, handleInner.Position.x - handleOuter.Position.x);
-                float pointRads = (float)((Math.PI / (double)editSides) * 2);
-                float segcenterRads = pointRads / 2f;
+                double length = delta.GetLength();
+                double originRads = Math.Atan2(delta.y, delta.x);
+                double segcenterRads = Math.PI / editSides; //PI  rads
+                double pointRads = segcenterRads * 2.0;     //TAU rads
 
-                //If the drawing is to be offset, then calculate new start and length
+                //OFFSET MODE: calculate circumradius, length is now treated as the apothem
                 if (drawoffset) {
-                    //rotate origin by one-half segment
                     originRads -= segcenterRads;
-
-                    //calculate the new circle length so that the segment lands firmly on the control handle                    
-                    double segangle = Math.PI - rightrads - segcenterRads;
-                    length = (float)Math.Abs(length / Math.Sin(segangle));
+                    length /= Math.Cos(segcenterRads);
                 }
 
                 circleSegmentLength = 0f; //reset
@@ -535,7 +532,7 @@ namespace TriDelta.DrawCircleMode {
                 if (drawcircle) {
                     for (int i = 0; i < editSides; i++) {
                         //calculate where the vertex should go, based on the number of segments
-                        float rads = originRads + (pointRads * (float)i);
+                        double rads = originRads + pointRads * i;
                         DrawnVertex point = new DrawnVertex();
                         point.stitch = true;
                         point.stitchline = true;
@@ -564,11 +561,11 @@ namespace TriDelta.DrawCircleMode {
                         List<DrawnVertex> outershape = new List<DrawnVertex>();
 
                         //calculate the spacing
-                        float outerlength = length + circleThickness;
+                        double outerlength = length + circleThickness;
 
                         //create the points
                         for (int i = 0; i < editSides; i++) {
-                            float rads = originRads + (pointRads * (float)i);
+                            double rads = originRads + pointRads * i;
                             DrawnVertex point = new DrawnVertex();
                             point.stitch = true;
                             point.stitchline = true;
@@ -598,16 +595,16 @@ namespace TriDelta.DrawCircleMode {
                 // Build the SPOKES
                 //---------------------------------------------------------------------------------
                 if (drawspokes) {
-                    float spokestart = spokestartcustom;
-                    float spokehalf = spokethickness / 2f;
+                    double spokestart = spokestartcustom;
+                    double spokehalf = spokethickness * 0.5;
 
                     //if a custom start length is not set, then calculate the minimum safe distance
                     if (spokestart < 0) {
                         //calculate the distance from the center where the segments lifedefs join with each other
-                        spokestart = (float)(spokehalf / Math.Sin(segcenterRads));
+                        spokestart = spokehalf / Math.Sin(segcenterRads);
 
                         //calculate and subtract the chord's sagitta to tighten the segments
-                        spokestart -= spokestart - (float)Math.Sqrt(Math.Pow(spokestart, 2) - Math.Pow(spokehalf, 2));
+                        spokestart -= spokestart - Math.Sqrt(Math.Pow(spokestart, 2) - Math.Pow(spokehalf, 2));
                     }
 
 
@@ -616,7 +613,7 @@ namespace TriDelta.DrawCircleMode {
                         shape = new List<DrawnVertex>();
 
                         //calculate current angle
-                        float rads_center = originRads + (pointRads * (float)i);
+                        double rads_center = originRads + pointRads * i;
                         Vector2D origin = new Vector2D(
                             handleInner.Position.x - (float)(Math.Cos(rads_center) * spokestart),
                             handleInner.Position.y - (float)(Math.Sin(rads_center) * spokestart)
@@ -624,8 +621,8 @@ namespace TriDelta.DrawCircleMode {
 
                         if (spokehalf > 0) {
                             //if a thickness is set, then the spoke is a rectangle offset from the center
-                            float rads_left = (float)(rads_center - (90 * (Math.PI / 180)));
-                            float rads_right = (float)(rads_center + (90 * (Math.PI / 180)));
+                            double rads_left = rads_center - (90.0 * (Math.PI / 180.0));
+                            double rads_right = rads_center + (90.0 * (Math.PI / 180.0));
 
                             DrawnVertex bl = new DrawnVertex();
                             bl.stitch = true;
@@ -693,16 +690,16 @@ namespace TriDelta.DrawCircleMode {
                 // Build the ANTE SPOKES (spokes that go to the center of the sidedef)
                 //---------------------------------------------------------------------------------
                 if (drawantespokes) {
-                    float spokestart = antespokestartcustom;
-                    float spokehalf = antespokethickness / 2f;
+                    double spokestart = antespokestartcustom;
+                    double spokehalf = antespokethickness * 0.5;
 
                     //if a custom start length is not set, then calculate the minimum safe distance
                     if (spokestart < 0) {
-                        //calculate the distance from the center where the segments lifedefs join with each other
-                        spokestart = (float)(spokehalf / Math.Sin(segcenterRads));
+                        //calculate the distance from the center where the segments linedefs join with each other
+                        spokestart = spokehalf / Math.Sin(segcenterRads);
 
                         //calculate and subtract the chord's sagitta to tighten the segments
-                        spokestart -= spokestart - (float)Math.Sqrt(Math.Pow(spokestart, 2) - Math.Pow(spokehalf, 2));
+                        spokestart -= spokestart - Math.Sqrt(Math.Pow(spokestart, 2) - Math.Pow(spokehalf, 2));
                     }
 
                     //calculate the TRUE segment length
@@ -717,15 +714,15 @@ namespace TriDelta.DrawCircleMode {
                     float seglen = (s2 - s1).GetLength();
 
                     //calculate how far the spoke shoots past the linedef (sagitta), and rope it back in
-                    float segsagitta = length - (float)Math.Sqrt(Math.Pow(length, 2) - Math.Pow(seglen / 2, 2));
-                    float spokelen = length - segsagitta - spokestart;
+                    double segsagitta = length - Math.Sqrt(Math.Pow(length, 2) - Math.Pow(seglen / 2, 2));
+                    double spokelen = length - segsagitta - spokestart;
 
                     //create the spoke for each vertex
                     for (int i = 0; i < editSides; i++) {
                         shape = new List<DrawnVertex>();
 
                         //calculate current angle
-                        float rads_center = originRads - segcenterRads + (pointRads * (float)i);
+                        double rads_center = originRads - segcenterRads + pointRads * i;
                         Vector2D origin = new Vector2D(
                             handleInner.Position.x - (float)(Math.Cos(rads_center) * spokestart),
                             handleInner.Position.y - (float)(Math.Sin(rads_center) * spokestart)
@@ -733,8 +730,8 @@ namespace TriDelta.DrawCircleMode {
 
                         if (spokehalf > 0) {
                             //if a thickness is set, then the spoke is a rectangle offset from the center
-                            float rads_left = (float)(rads_center - (90 * (Math.PI / 180)));
-                            float rads_right = (float)(rads_center + (90 * (Math.PI / 180)));
+                            double rads_left = rads_center - (90.0 * (Math.PI / 180.0));
+                            double rads_right = rads_center + (90.0 * (Math.PI / 180.0));
 
                             DrawnVertex bl = new DrawnVertex();
                             bl.stitch = true;
