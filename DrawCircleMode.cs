@@ -401,12 +401,17 @@ namespace TriDelta.DrawCircleMode {
             float length = (handleOuter.Position - handleInner.Position).GetLength();
             double rads = angle * (Math.PI / 180);
             Vector2D position = new Vector2D(
-               handleInner.Position.x + (float)(Math.Cos(rads) * length),
-               handleInner.Position.y + (float)(Math.Sin(rads) * length)
+                handleInner.Position.x + (float)(Math.Cos(rads) * length),
+                handleInner.Position.y + (float)(Math.Sin(rads) * length)
             );
-            handleOuter.Position = snapguidetogrid && !nosnap ? General.Map.Grid.SnappedToGrid(position) : position;
 
-            UpdateLengthBox();
+            if (snapguidetogrid && !nosnap) { 
+                handleOuter.Position = General.Map.Grid.SnappedToGrid(position);
+                UpdateLengthBox();
+            } else {
+                handleOuter.Position = position;
+            }
+
             Update();
         }
 
@@ -421,12 +426,16 @@ namespace TriDelta.DrawCircleMode {
             Vector2D O = handleOuter.Position - handleInner.Position;
             double angle = Math.Atan2(O.y, O.x);
             Vector2D position = new Vector2D(
-               handleInner.Position.x + (float)(Math.Cos(angle) * length),
-               handleInner.Position.y + (float)(Math.Sin(angle) * length)
+                handleInner.Position.x + (float)(Math.Cos(angle) * length),
+                handleInner.Position.y + (float)(Math.Sin(angle) * length)
             );
-            handleOuter.Position = snapguidetogrid && !nosnap ? General.Map.Grid.SnappedToGrid(position) : position;
 
-            UpdateAngleBox();
+            if (snapguidetogrid && !nosnap) {
+                handleOuter.Position = General.Map.Grid.SnappedToGrid(position);
+                UpdateAngleBox();
+            } else {
+                handleOuter.Position = position;
+            }
             Update();
         }
 
@@ -440,8 +449,8 @@ namespace TriDelta.DrawCircleMode {
             double originRads = Math.Atan2(O.y, O.x);
             double pointRads = (Math.PI / (double)editSides) * 2.0;
             Vector2D position = new Vector2D(
-               handleInner.Position.x + (float)(Math.Cos(originRads + pointRads * nodes) * length),
-               handleInner.Position.y + (float)(Math.Sin(originRads + pointRads * nodes) * length)
+                handleInner.Position.x + (float)(Math.Cos(originRads + pointRads * nodes) * length),
+                handleInner.Position.y + (float)(Math.Sin(originRads + pointRads * nodes) * length)
             );
             handleOuter.Position = position;
 
