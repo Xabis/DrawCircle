@@ -73,6 +73,8 @@ namespace TriDelta.DrawCircleMode {
         private List<List<DrawnVertex>> shapes;
 
         private int editSides;
+        private int drawnSides;
+        private bool locksides;
         private float circleThickness = 0f;
         float spokethickness = 0f;
         float spokestartcustom = -1f;
@@ -135,6 +137,8 @@ namespace TriDelta.DrawCircleMode {
             shapes = new List<List<DrawnVertex>>();
 
             editSides = General.Settings.ReadPluginSetting("editsides", 10);
+            drawnSides = General.Settings.ReadPluginSetting("drawnsides", editSides);
+            locksides = General.Settings.ReadPluginSetting("locksides", true);
 
             tbAddSide = new ToolStripButton(GetResourceImage("TriDelta.DrawCircleMode.icon_increase.png"));
             tbAddSide.Text = "Increase Sides";
@@ -233,9 +237,43 @@ namespace TriDelta.DrawCircleMode {
                     if (editSides < 1)
                         editSides = 1;
                     General.Settings.WritePluginSetting("editsides", editSides);
+                    if (locksides || drawnSides > editSides) {
+                        drawnSides = editSides;
+                        General.Settings.WritePluginSetting("drawnsides", drawnSides);
+                    }
+
                     if (ModeChanged != null)
                         ModeChanged(this);
                     Update();
+                }
+            }
+        }
+
+        internal int DrawnSides {
+            get { return drawnSides; }
+            set {
+                if (drawnSides != value) {
+                    drawnSides = value;
+                    if (drawnSides > editSides)
+                        drawnSides = editSides;
+                    if (drawnSides < 1)
+                        drawnSides = 1;
+                    General.Settings.WritePluginSetting("drawnsides", drawnSides);
+                    if (ModeChanged != null)
+                        ModeChanged(this);
+                    Update();
+                }
+            }
+        }
+
+        internal bool LockSides {
+            get { return locksides; }
+            set {
+                if (locksides != value) {
+                    locksides = value;
+                    General.Settings.WritePluginSetting("locksides", value);
+                    if (locksides)
+                        DrawnSides = CircleSides;
                 }
             }
         }
@@ -510,7 +548,7 @@ namespace TriDelta.DrawCircleMode {
                 shape = new List<DrawnVertex>();
 
                 //Calculate the angle and circle starting point
-                Vector2D delta = handleOuter.Position - handleInner.Position;
+                Vector2D delta = handleInner.Position - handleOuter.Position;
                 double length = delta.GetLength();
                 double originRads = Math.Atan2(delta.y, delta.x);
                 double segcenterRads = Math.PI / editSides; //PI  rads
@@ -530,14 +568,14 @@ namespace TriDelta.DrawCircleMode {
                 // Build the MAIN circle
                 //---------------------------------------------------------------------------------
                 if (drawcircle) {
-                    for (int i = 0; i < editSides; i++) {
+                    for (int i = 0; i < drawnSides; i++) {
                         //calculate where the vertex should go, based on the number of segments
                         double rads = originRads + pointRads * i;
                         DrawnVertex point = new DrawnVertex();
                         point.stitch = true;
                         point.stitchline = true;
-                        point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * length);
                         point.pos.x = handleInner.Position.x - (float)(Math.Cos(rads) * length);
+                        point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * length);
                         if (snapcircletogrid)
                             point.pos = General.Map.Grid.SnappedToGrid(point.pos);
                         shape.Add(point);
@@ -564,13 +602,13 @@ namespace TriDelta.DrawCircleMode {
                         double outerlength = length + circleThickness;
 
                         //create the points
-                        for (int i = 0; i < editSides; i++) {
+                        for (int i = 0; i < drawnSides; i++) {
                             double rads = originRads + pointRads * i;
                             DrawnVertex point = new DrawnVertex();
                             point.stitch = true;
                             point.stitchline = true;
-                            point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * outerlength);
                             point.pos.x = handleInner.Position.x - (float)(Math.Cos(rads) * outerlength);
+                            point.pos.y = handleInner.Position.y - (float)(Math.Sin(rads) * outerlength);
                             if (snapcircletogrid)
                                 point.pos = General.Map.Grid.SnappedToGrid(point.pos);
                             outershape.Add(point);
@@ -609,7 +647,7 @@ namespace TriDelta.DrawCircleMode {
 
 
                     //create the spoke for each vertex
-                    for (int i = 0; i < editSides; i++) {
+                    for (int i = 0; i < drawnSides; i++) {
                         shape = new List<DrawnVertex>();
 
                         //calculate current angle
@@ -621,8 +659,8 @@ namespace TriDelta.DrawCircleMode {
 
                         if (spokehalf > 0) {
                             //if a thickness is set, then the spoke is a rectangle offset from the center
-                            double rads_left = rads_center - (90.0 * (Math.PI / 180.0));
-                            double rads_right = rads_center + (90.0 * (Math.PI / 180.0));
+                            double rads_left = rads_center - rightrads;
+                            double rads_right = rads_center + rightrads;
 
                             DrawnVertex bl = new DrawnVertex();
                             bl.stitch = true;
@@ -681,7 +719,8 @@ namespace TriDelta.DrawCircleMode {
                             shape.Add(p2);
                         }
 
-                        shape.Add(shape[0]); //close it
+                        if (shape.Count > 2)
+                            shape.Add(shape[0]); //close it
                         shapes.Add(shape);
                     }
                 }
@@ -717,12 +756,16 @@ namespace TriDelta.DrawCircleMode {
                     double segsagitta = length - Math.Sqrt(Math.Pow(length, 2) - Math.Pow(seglen / 2, 2));
                     double spokelen = length - segsagitta - spokestart;
 
+                    int acnt = drawnSides;
+                    if (acnt < editSides)
+                        acnt -= 1;
+
                     //create the spoke for each vertex
-                    for (int i = 0; i < editSides; i++) {
+                    for (int i = 0; i < acnt; i++) {
                         shape = new List<DrawnVertex>();
 
                         //calculate current angle
-                        double rads_center = originRads - segcenterRads + pointRads * i;
+                        double rads_center = originRads + segcenterRads + pointRads * i;
                         Vector2D origin = new Vector2D(
                             handleInner.Position.x - (float)(Math.Cos(rads_center) * spokestart),
                             handleInner.Position.y - (float)(Math.Sin(rads_center) * spokestart)
@@ -730,8 +773,8 @@ namespace TriDelta.DrawCircleMode {
 
                         if (spokehalf > 0) {
                             //if a thickness is set, then the spoke is a rectangle offset from the center
-                            double rads_left = rads_center - (90.0 * (Math.PI / 180.0));
-                            double rads_right = rads_center + (90.0 * (Math.PI / 180.0));
+                            double rads_left = rads_center - rightrads;
+                            double rads_right = rads_center + rightrads;
 
                             DrawnVertex bl = new DrawnVertex();
                             bl.stitch = true;
@@ -790,7 +833,8 @@ namespace TriDelta.DrawCircleMode {
                             shape.Add(p2);
                         }
 
-                        shape.Add(shape[0]); //close it
+                        if (shape.Count > 2)
+                            shape.Add(shape[0]); //close it
                         shapes.Add(shape);
                     }
                 }

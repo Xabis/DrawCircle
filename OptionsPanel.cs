@@ -16,6 +16,7 @@ namespace TriDelta.DrawCircleMode {
 
         //TRack last value for relative processing
         int LastSides = 0;
+        int LastDrawnSides = 0;
         float LastAngle = 0;
         float LastLength = 0;
         float LastThickness = 0;
@@ -55,6 +56,7 @@ namespace TriDelta.DrawCircleMode {
             chkAlwaysCreateOnEdit.Checked = mode.AlwaysCreateOnEdit;
 
             LastSides = mode.CircleSides;
+            LastDrawnSides = mode.DrawnSides;
             LastThickness = mode.CircleThickness;
             LastSpokeSize = mode.SpokeThickness;
             LastSpokeStart = mode.SpokeMinimum;
@@ -62,12 +64,14 @@ namespace TriDelta.DrawCircleMode {
             LastAnteStart = mode.AnteSpokeMinimum;
 
             udSideCount.Text = LastSides.ToString();
+            udSideDraw.Text = LastDrawnSides.ToString();
             udThickness.Text = LastThickness.ToString("0.###");
             udSpokeSize.Text = LastSpokeSize.ToString("0.###");
             udSpokeStart.Text = LastSpokeStart.ToString("0.###");
             udAnteSpokeSize.Text = LastAnteSize.ToString("0.###");
             udAnteSpokeStart.Text = LastAnteStart.ToString("0.###");
 
+            udSideDraw.Enabled = !mode.LockSides;
             chkFillCenter.Enabled = chkDrawCircle.Checked;
             udThickness.Enabled = chkDrawCircle.Checked;
 
@@ -84,9 +88,9 @@ namespace TriDelta.DrawCircleMode {
         }
 
         private void mode_ModeChanged(DrawCircleMode mode) {
-            if (bUpdatingSides)
-                return;
-            udSideCount.Text = mode.CircleSides.ToString();
+            if (!bUpdatingSides)
+                udSideCount.Text = mode.CircleSides.ToString();
+            udSideDraw.Text = mode.DrawnSides.ToString();
         }
 
         internal bool EditState {
@@ -174,6 +178,17 @@ namespace TriDelta.DrawCircleMode {
             LastSides = udSideCount.GetResult(LastSides);
             udSideCount.Text = LastSides.ToString();
         }
+        private void udSideDraw_WhenTextChanged(object sender, EventArgs e) {
+            mode.DrawnSides = udSideDraw.GetResult(LastDrawnSides);
+        }
+        private void udSideDraw_Apply(object sender, EventArgs e) {
+            LastDrawnSides = udSideDraw.GetResult(LastDrawnSides);
+            udSideDraw.Text = LastDrawnSides.ToString();
+        }
+        private void cmdToggleSideLock_Click(object sender, EventArgs e) {
+            mode.LockSides = !mode.LockSides;
+            udSideDraw.Enabled = !mode.LockSides;
+        }
 
         //Angle
         //-------------------------------
@@ -245,7 +260,7 @@ namespace TriDelta.DrawCircleMode {
             udSpokeSize.Text = LastSpokeSize.ToString();
         }
 
-        private void UdSpokeStart_WhenButtonsClicked(object sender, EventArgs e) {
+        private void udSpokeStart_WhenTextChanged(object sender, EventArgs e) {
             mode.SpokeMinimum = udSpokeStart.GetResultFloat(LastSpokeStart);
         }
         private void UdSpokeStart_Apply(object sender, EventArgs e) {
