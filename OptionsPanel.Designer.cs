@@ -91,7 +91,7 @@
             this.lblAngle.AutoSize = true;
             this.lblAngle.Location = new System.Drawing.Point(3, 68);
             this.lblAngle.Name = "lblAngle";
-            this.lblAngle.Size = new System.Drawing.Size(43, 13);
+            this.lblAngle.Size = new System.Drawing.Size(59, 13);
             this.lblAngle.TabIndex = 0;
             this.lblAngle.Text = "Angle:";
             // 
@@ -103,7 +103,7 @@
             this.grpProps.Location = new System.Drawing.Point(0, 168);
             this.grpProps.Name = "grpProps";
             this.grpProps.Padding = new System.Windows.Forms.Padding(10);
-            this.grpProps.Size = new System.Drawing.Size(200, 150);
+            this.grpProps.Size = new System.Drawing.Size(200, 180);
             this.grpProps.TabIndex = 6;
             this.grpProps.TabStop = false;
             this.grpProps.Text = "Properties";
@@ -116,7 +116,9 @@
             this.tblProps.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tblProps.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblProps.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblProps.Controls.Add(this.udThickness, 1, 4);
             this.tblProps.Controls.Add(this.cmdToggleSideLock, 2, 1);
+            this.tblProps.Controls.Add(this.label2, 0, 4);
             this.tblProps.Controls.Add(this.udSideDraw, 1, 1);
             this.tblProps.Controls.Add(this.label1, 0, 3);
             this.tblProps.Controls.Add(this.udSideCount, 1, 0);
@@ -129,12 +131,13 @@
             this.tblProps.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblProps.Location = new System.Drawing.Point(10, 23);
             this.tblProps.Name = "tblProps";
-            this.tblProps.RowCount = 4;
+            this.tblProps.RowCount = 5;
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblProps.Size = new System.Drawing.Size(180, 120);
+            this.tblProps.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblProps.Size = new System.Drawing.Size(180, 150);
             this.tblProps.TabIndex = 0;
             // 
             // cmdToggleSideLock
@@ -162,9 +165,9 @@
             this.udSideDraw.ButtonStepSmall = 8F;
             this.udSideDraw.ButtonStepsUseModifierKeys = true;
             this.udSideDraw.ButtonStepsWrapAround = true;
-            this.udSideDraw.Location = new System.Drawing.Point(52, 33);
+            this.udSideDraw.Location = new System.Drawing.Point(68, 33);
             this.udSideDraw.Name = "udSideDraw";
-            this.udSideDraw.Size = new System.Drawing.Size(81, 24);
+            this.udSideDraw.Size = new System.Drawing.Size(65, 24);
             this.udSideDraw.StepValues = null;
             this.udSideDraw.TabIndex = 7;
             this.udSideDraw.WhenTextChanged += new System.EventHandler(this.udSideDraw_WhenTextChanged);
@@ -177,7 +180,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Length:";
             // 
@@ -196,9 +199,9 @@
             this.udSideCount.ButtonStepsWrapAround = true;
             this.tblProps.SetColumnSpan(this.udSideCount, 2);
             this.udSideCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.udSideCount.Location = new System.Drawing.Point(52, 3);
+            this.udSideCount.Location = new System.Drawing.Point(68, 3);
             this.udSideCount.Name = "udSideCount";
-            this.udSideCount.Size = new System.Drawing.Size(125, 24);
+            this.udSideCount.Size = new System.Drawing.Size(109, 24);
             this.udSideCount.StepValues = null;
             this.udSideCount.TabIndex = 6;
             this.udSideCount.WhenTextChanged += new System.EventHandler(this.UdSideCount_WhenTextChanged);
@@ -211,7 +214,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(3, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Sides:";
             // 
@@ -221,7 +224,7 @@
             this.lblSidesShown.AutoSize = true;
             this.lblSidesShown.Location = new System.Drawing.Point(3, 38);
             this.lblSidesShown.Name = "lblSidesShown";
-            this.lblSidesShown.Size = new System.Drawing.Size(43, 13);
+            this.lblSidesShown.Size = new System.Drawing.Size(59, 13);
             this.lblSidesShown.TabIndex = 2;
             this.lblSidesShown.Text = "Shown:";
             this.ttOptions.SetToolTip(this.lblSidesShown, "Number of vertices to render");
@@ -241,9 +244,9 @@
             this.udLength.ButtonStepsWrapAround = true;
             this.tblProps.SetColumnSpan(this.udLength, 2);
             this.udLength.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.udLength.Location = new System.Drawing.Point(52, 93);
+            this.udLength.Location = new System.Drawing.Point(68, 93);
             this.udLength.Name = "udLength";
-            this.udLength.Size = new System.Drawing.Size(125, 24);
+            this.udLength.Size = new System.Drawing.Size(109, 24);
             this.udLength.StepValues = null;
             this.udLength.TabIndex = 9;
             this.udLength.WhenTextChanged += new System.EventHandler(this.UdLength_WhenTextChanged);
@@ -264,9 +267,9 @@
             this.udAngle.ButtonStepsUseModifierKeys = true;
             this.udAngle.ButtonStepsWrapAround = true;
             this.udAngle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.udAngle.Location = new System.Drawing.Point(52, 63);
+            this.udAngle.Location = new System.Drawing.Point(68, 63);
             this.udAngle.Name = "udAngle";
-            this.udAngle.Size = new System.Drawing.Size(81, 24);
+            this.udAngle.Size = new System.Drawing.Size(65, 24);
             this.udAngle.StepValues = null;
             this.udAngle.TabIndex = 7;
             this.udAngle.WhenTextChanged += new System.EventHandler(this.UdAngle_WhenTextChanged);
@@ -319,7 +322,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 8);
+            this.label2.Location = new System.Drawing.Point(3, 128);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 4;
@@ -445,7 +448,7 @@
             // 
             this.chkFillCenter.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.chkFillCenter, 2);
-            this.chkFillCenter.Location = new System.Drawing.Point(3, 33);
+            this.chkFillCenter.Location = new System.Drawing.Point(3, 3);
             this.chkFillCenter.Name = "chkFillCenter";
             this.chkFillCenter.Size = new System.Drawing.Size(184, 17);
             this.chkFillCenter.TabIndex = 12;
@@ -732,10 +735,10 @@
             this.grpCircle.Controls.Add(this.tableLayoutPanel1);
             this.grpCircle.Controls.Add(this.chkDrawCircle);
             this.grpCircle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpCircle.Location = new System.Drawing.Point(0, 318);
+            this.grpCircle.Location = new System.Drawing.Point(0, 348);
             this.grpCircle.Name = "grpCircle";
             this.grpCircle.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
-            this.grpCircle.Size = new System.Drawing.Size(200, 79);
+            this.grpCircle.Size = new System.Drawing.Size(200, 49);
             this.grpCircle.TabIndex = 10;
             this.grpCircle.TabStop = false;
             // 
@@ -745,16 +748,14 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.udThickness, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.chkFillCenter, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.chkFillCenter, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(180, 53);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(180, 23);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // udThickness
@@ -770,10 +771,11 @@
             this.udThickness.ButtonStepSmall = 8F;
             this.udThickness.ButtonStepsUseModifierKeys = true;
             this.udThickness.ButtonStepsWrapAround = true;
+            this.tblProps.SetColumnSpan(this.udThickness, 2);
             this.udThickness.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.udThickness.Location = new System.Drawing.Point(68, 3);
+            this.udThickness.Location = new System.Drawing.Point(68, 123);
             this.udThickness.Name = "udThickness";
-            this.udThickness.Size = new System.Drawing.Size(126, 24);
+            this.udThickness.Size = new System.Drawing.Size(109, 24);
             this.udThickness.StepValues = null;
             this.udThickness.TabIndex = 8;
             this.udThickness.WhenTextChanged += new System.EventHandler(this.UdThickness_WhenTextChanged);
@@ -803,7 +805,7 @@
             this.Controls.Add(this.grpProps);
             this.Controls.Add(this.grpAppearance);
             this.Name = "OptionsPanel";
-            this.Size = new System.Drawing.Size(200, 681);
+            this.Size = new System.Drawing.Size(200, 756);
             this.grpProps.ResumeLayout(false);
             this.grpProps.PerformLayout();
             this.tblProps.ResumeLayout(false);

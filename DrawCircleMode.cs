@@ -551,23 +551,38 @@ namespace TriDelta.DrawCircleMode {
                 Vector2D delta = handleInner.Position - handleOuter.Position;
                 double length = delta.GetLength();
                 double originRads = Math.Atan2(delta.y, delta.x);
-                double segcenterRads = Math.PI / editSides; //PI  rads
-                double pointRads = segcenterRads * 2.0;     //TAU rads
+                double segcenterRads = 0;
+                double pointRads = 0;
+
+                //Calculate divisions if there are more than one side
+                if (editSides > 1) {
+                    segcenterRads = Math.PI / editSides; //PI  rads
+                    pointRads = segcenterRads * 2.0;     //TAU rads
+                }
 
                 //OFFSET MODE: calculate circumradius, length is now treated as the apothem
-                if (drawoffset) {
+                if (drawoffset && editSides > 2) {
                     originRads -= segcenterRads;
                     length /= Math.Cos(segcenterRads);
                 }
 
                 circleSegmentLength = 0f; //reset
 
-                Vector2D last = new Vector2D();
-
                 //---------------------------------------------------------------------------------
                 // Build the MAIN circle
                 //---------------------------------------------------------------------------------
                 if (drawcircle) {
+                    Vector2D last = new Vector2D();
+
+                    //If edit sides is 1, then treat the origin as the first point
+                    if (editSides == 1) {
+                        DrawnVertex point = new DrawnVertex();
+                        point.stitch = true;
+                        point.stitchline = true;
+                        point.pos = handleInner.Position;
+                        shape.Add(point);
+                    }
+
                     for (int i = 0; i < drawnSides; i++) {
                         //calculate where the vertex should go, based on the number of segments
                         double rads = originRads + pointRads * i;
@@ -595,7 +610,7 @@ namespace TriDelta.DrawCircleMode {
                     shape.Add(shape[0]); //close it
 
                     //Build the OUTER circle (if configured)
-                    if (circleThickness != 0f) {
+                    if (circleThickness != 0f && editSides > 2) {
                         List<DrawnVertex> outershape = new List<DrawnVertex>();
 
                         //calculate the spacing
@@ -635,16 +650,23 @@ namespace TriDelta.DrawCircleMode {
                 if (drawspokes) {
                     double spokestart = spokestartcustom;
                     double spokehalf = spokethickness * 0.5;
+                    double spokelen = length;
 
                     //if a custom start length is not set, then calculate the minimum safe distance
-                    if (spokestart < 0) {
+                    if (editSides == 1) {
+                        //Special handling when sides is set to 1
+                        if (spokestart < 0)
+                            spokestart = length;
+                        if (circleThickness > 0)
+                            spokelen = circleThickness;
+                    } else if (spokestart < 0) {
                         //calculate the distance from the center where the segments lifedefs join with each other
                         spokestart = spokehalf / Math.Sin(segcenterRads);
 
                         //calculate and subtract the chord's sagitta to tighten the segments
                         spokestart -= spokestart - Math.Sqrt(Math.Pow(spokestart, 2) - Math.Pow(spokehalf, 2));
+                        spokelen = length - spokestart;
                     }
-
 
                     //create the spoke for each vertex
                     for (int i = 0; i < drawnSides; i++) {
@@ -683,8 +705,8 @@ namespace TriDelta.DrawCircleMode {
                             DrawnVertex tr = new DrawnVertex();
                             tr.stitch = true;
                             tr.stitchline = true;
-                            tr.pos.y = br.pos.y - (float)(Math.Sin(rads_center) * (length - spokestart));
-                            tr.pos.x = br.pos.x - (float)(Math.Cos(rads_center) * (length - spokestart));
+                            tr.pos.y = br.pos.y - (float)(Math.Sin(rads_center) * spokelen);
+                            tr.pos.x = br.pos.x - (float)(Math.Cos(rads_center) * spokelen);
                             if (snapcircletogrid)
                                 tr.pos = General.Map.Grid.SnappedToGrid(tr.pos);
                             shape.Add(tr);
@@ -712,8 +734,8 @@ namespace TriDelta.DrawCircleMode {
                             DrawnVertex p2 = new DrawnVertex();
                             p2.stitch = true;
                             p2.stitchline = true;
-                            p2.pos.y = origin.y - (float)(Math.Sin(rads_center) * (length - spokestart));
-                            p2.pos.x = origin.x - (float)(Math.Cos(rads_center) * (length - spokestart));
+                            p2.pos.y = origin.y - (float)(Math.Sin(rads_center) * spokelen);
+                            p2.pos.x = origin.x - (float)(Math.Cos(rads_center) * spokelen);
                             if (snapcircletogrid)
                                 p2.pos = General.Map.Grid.SnappedToGrid(p2.pos);
                             shape.Add(p2);
@@ -728,33 +750,43 @@ namespace TriDelta.DrawCircleMode {
                 //---------------------------------------------------------------------------------
                 // Build the ANTE SPOKES (spokes that go to the center of the sidedef)
                 //---------------------------------------------------------------------------------
-                if (drawantespokes) {
+                if (drawantespokes && editSides != 2) {
                     double spokestart = antespokestartcustom;
                     double spokehalf = antespokethickness * 0.5;
+                    double spokelen = length;
+                    double anteorigin = originRads;
 
                     //if a custom start length is not set, then calculate the minimum safe distance
-                    if (spokestart < 0) {
-                        //calculate the distance from the center where the segments linedefs join with each other
+                    if (editSides == 1) {
+                        //Special handling when sides is set to 1
+                        if (spokestart < 0)
+                            spokestart = 0;
+                        anteorigin += Math.PI;
+                        if (circleThickness > 0)
+                            spokelen = circleThickness;
+                    } else if(spokestart < 0) {
+                        //calculate the distance from the center where the segments lifedefs join with each other
                         spokestart = spokehalf / Math.Sin(segcenterRads);
 
                         //calculate and subtract the chord's sagitta to tighten the segments
                         spokestart -= spokestart - Math.Sqrt(Math.Pow(spokestart, 2) - Math.Pow(spokehalf, 2));
+
+                        //calculate the TRUE segment length
+                        Vector2D s1 = new Vector2D(
+                            handleInner.Position.x - (float)(Math.Cos(anteorigin) * length),
+                            handleInner.Position.y - (float)(Math.Sin(anteorigin) * length)
+                        );
+                        Vector2D s2 = new Vector2D(
+                            handleInner.Position.x - (float)(Math.Cos(anteorigin + pointRads) * length),
+                            handleInner.Position.y - (float)(Math.Sin(anteorigin + pointRads) * length)
+                        );
+                        float seglen = (s2 - s1).GetLength();
+
+                        //calculate how far the spoke shoots past the linedef (sagitta), and rope it back in
+                        double segsagitta = length - Math.Sqrt(Math.Pow(length, 2) - Math.Pow(seglen / 2, 2));
+                        spokelen = length - segsagitta - spokestart;
                     }
 
-                    //calculate the TRUE segment length
-                    Vector2D s1 = new Vector2D(
-                        handleInner.Position.x - (float)(Math.Cos(originRads) * length),
-                        handleInner.Position.y - (float)(Math.Sin(originRads) * length)
-                    );
-                    Vector2D s2 = new Vector2D(
-                        handleInner.Position.x - (float)(Math.Cos(originRads + pointRads) * length),
-                        handleInner.Position.y - (float)(Math.Sin(originRads + pointRads) * length)
-                    );
-                    float seglen = (s2 - s1).GetLength();
-
-                    //calculate how far the spoke shoots past the linedef (sagitta), and rope it back in
-                    double segsagitta = length - Math.Sqrt(Math.Pow(length, 2) - Math.Pow(seglen / 2, 2));
-                    double spokelen = length - segsagitta - spokestart;
 
                     int acnt = drawnSides;
                     if (acnt < editSides)
@@ -765,7 +797,7 @@ namespace TriDelta.DrawCircleMode {
                         shape = new List<DrawnVertex>();
 
                         //calculate current angle
-                        double rads_center = originRads + segcenterRads + pointRads * i;
+                        double rads_center = anteorigin + segcenterRads + pointRads * i;
                         Vector2D origin = new Vector2D(
                             handleInner.Position.x - (float)(Math.Cos(rads_center) * spokestart),
                             handleInner.Position.y - (float)(Math.Sin(rads_center) * spokestart)

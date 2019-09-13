@@ -73,7 +73,11 @@ namespace TriDelta.DrawCircleMode {
 
             udSideDraw.Enabled = !mode.LockSides;
             chkFillCenter.Enabled = chkDrawCircle.Checked;
-            udThickness.Enabled = chkDrawCircle.Checked;
+            if (mode.LockSides) {
+                cmdToggleSideLock.Image = Properties.Resources.Link;
+            } else {
+                cmdToggleSideLock.Image = Properties.Resources.Unlink;
+            }
 
             udSpokeSize.Enabled = chkDrawSpokes.Checked;
             udSpokeStart.Enabled = chkDrawSpokes.Checked;
@@ -163,7 +167,6 @@ namespace TriDelta.DrawCircleMode {
         private void chkDrawCircle_CheckedChanged(object sender, EventArgs e) {
             mode.DrawCircle = chkDrawCircle.Checked;
             chkFillCenter.Enabled = chkDrawCircle.Checked;
-            udThickness.Enabled = chkDrawCircle.Checked;
         }
 
 
@@ -171,7 +174,10 @@ namespace TriDelta.DrawCircleMode {
         //-------------------------------
         private void UdSideCount_WhenTextChanged(object sender, EventArgs e) {
             bUpdatingSides = true;
+            int oldval = mode.CircleSides;
             mode.CircleSides = udSideCount.GetResult(LastSides);
+            if (mode.CircleSides == oldval)
+                udSideCount.Text = oldval.ToString(); //rollback
             bUpdatingSides = false;
         }
         private void UdSideCount_Apply(object sender, EventArgs e) {
@@ -188,6 +194,11 @@ namespace TriDelta.DrawCircleMode {
         private void cmdToggleSideLock_Click(object sender, EventArgs e) {
             mode.LockSides = !mode.LockSides;
             udSideDraw.Enabled = !mode.LockSides;
+            if (mode.LockSides) {
+                cmdToggleSideLock.Image = Properties.Resources.Link;
+            } else {
+                cmdToggleSideLock.Image = Properties.Resources.Unlink;
+            }
         }
 
         //Angle
